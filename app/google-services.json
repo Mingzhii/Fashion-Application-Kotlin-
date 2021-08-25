@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "666397208540",
+    "project_id": "mad-practical-dfed6",
+    "storage_bucket": "mad-practical-dfed6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666397208540:android:fad7971d3b1f06baa1a919",
+        "android_client_info": {
+          "package_name": "com.example.firebasedemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666397208540-3bkf1rrnhf4gepe14mpppujqvpvvdo9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkour4yek8ZTGlFQzCRyXdLM1pnzDFCYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666397208540-3bkf1rrnhf4gepe14mpppujqvpvvdo9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
