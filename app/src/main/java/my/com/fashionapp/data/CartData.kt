@@ -6,6 +6,7 @@ import java.util.*
 
 data class Cart (
     @DocumentId
+
     var cartUserId         : String = "",
     var cartProductId      : String = "",
     var cartProductQuan    : Int = 0,
