@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/ic_home.xml" value="0.290625" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/ic_love.xml" value="0.290625" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/ic_profile.xml" value="0.290625" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/item_selector.xml" value="0.290625" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/round_corner.xml" value="0.290625" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/activity_insert_product.xml" value="0.4" />

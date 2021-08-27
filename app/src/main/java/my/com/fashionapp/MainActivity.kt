@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val homeFragment = HomeFragment()
         val likeFragment = LikeFragment()
         val searchFragment = SearchFragment()
