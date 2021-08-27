@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:666397208540:android:fad7971d3b1f06baa1a919",
         "android_client_info": {
-          "package_name": "com.example.firebasedemo"
+          "package_name": "my.com.fashionapp"
         }
       },
       "oauth_client": [

@@ -17,7 +17,7 @@ class UserViewModel : ViewModel() {
     }
 
     fun get(id : String): User?{
-        return users.value?.find { f -> f.userId == id }
+        return users.value?.find { u -> u.userId == id }
     }
 
     fun getAll() = users
@@ -27,19 +27,19 @@ class UserViewModel : ViewModel() {
     }
 
     fun deleteAll(){
-        users.value?.forEach{ f -> delete(f.userId)}
+        users.value?.forEach{ u -> delete(u.userId)}
     }
 
-    fun set(f: User){
-        col.document(f.userId).set(f)
+    fun set(u: User){
+        col.document(u.userId).set(u)
     }
 
     private fun nameExists(name: String): Boolean {
-        return users.value?.any{ f -> f.userName == name } ?: false
+        return users.value?.any{ u -> u.userName == name } ?: false
     }
 
     private fun phoneExists(phone: Int): Boolean {
-        return users.value?.any { f -> f.phoneNumber == phone } ?: false
+        return users.value?.any { u -> u.phoneNumber == phone } ?: false
     }
 
 }
