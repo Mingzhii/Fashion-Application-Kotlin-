@@ -42,4 +42,8 @@ class UserViewModel : ViewModel() {
         return users.value?.any { u -> u.phoneNumber == phone } ?: false
     }
 
+    //-------------------------------------------------------------------
+    // Validation
+
+
 }
