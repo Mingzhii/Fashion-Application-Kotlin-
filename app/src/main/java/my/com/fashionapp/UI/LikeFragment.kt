@@ -19,7 +19,6 @@ class LikeFragment : Fragment() {
 
         binding = FragmentLikeBinding.inflate(inflater, container, false)
 
-
         // TODO
         binding.bottomNavigation.selectedItemId = R.id.nav_like
 

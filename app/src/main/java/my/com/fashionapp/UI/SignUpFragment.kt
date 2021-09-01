@@ -27,14 +27,16 @@ class SignUpFragment : Fragment() {
 
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
 
+        binding.btnResgiterBack.setOnClickListener {  }
+
         binding.txtLogin.setOnClickListener {
             view?.snack("Clicked")
             nav.navigateUp()
         }
 
         binding.btnRegister.setOnClickListener {
-            val email = binding.edtEmail.text.toString().trim()
-            val password = binding.edtPassword.text.toString().trim()
+            val email = binding.edtRegisterEmail.editText?.text.toString().trim()
+            val password = binding.edtRegisterPassword.editText?.text.toString().trim()
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(

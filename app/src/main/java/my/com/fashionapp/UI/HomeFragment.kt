@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
                 R.id.nav_like -> nav.navigate(R.id.likeFragment)
                 R.id.nav_search -> nav.navigate(R.id.searchFragment)
                 R.id.nav_shop -> nav.navigate(R.id.shopFragment)
-                R.id.nav_profile -> nav.navigate(R.id.signUpFragment)
+                R.id.nav_profile -> nav.navigate(R.id.profileFragment)
             }
             true
         }

@@ -1,7 +1,9 @@
 package my.com.fashionapp.data
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -10,6 +12,25 @@ class UserViewModel : ViewModel() {
 
     private val col= Firebase.firestore.collection("users")
     private val users = MutableLiveData<List<User>>()
+    private val userLiveData = MutableLiveData<User>()
+    private var listener: ListenerRegistration? = null
+
+
+    // Remove snapshot listener when view model is destroyed
+    override fun onCleared() {
+        super.onCleared()
+        listener?.remove()
+    }
+
+    fun getUserLiveDate(): LiveData<User> {
+        return userLiveData
+    }
+
+    fun getUser(): User? {
+        return userLiveData.value
+    }
+
+
 
     //init block will always run before the constructor
     init {

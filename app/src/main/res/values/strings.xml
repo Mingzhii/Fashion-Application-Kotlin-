@@ -11,6 +11,7 @@
     <string name="like_text">Like</string>
     <string name="search_text">Search</string>
     <string name="shop_text">Shop</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings related to login -->
@@ -32,5 +33,12 @@
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="already_have_an_account">Already have an account ? </string>
-    <string name="don_t_have_an_account">Don\'t have an account ?</string>
+    <string name="don_t_have_an_account">Don\'t have an account ? </string>
+    <string name="me">ME</string>
+    <string name="let_s_get_personal">LET\'S GET PERSONAL</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">forget Password</string>
 </resources>
