@@ -50,4 +50,18 @@
         android:name="my.com.fashionapp.UI.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/setUpProfileFragment"
+        android:name="my.com.fashionapp.UI.SetUpProfileFragment"
+        android:label="fragment_set_up_profile"
+        tools:layout="@layout/fragment_set_up_profile" />
+    <fragment
+        android:id="@+id/loginProfileFragment"
+        android:name="my.com.fashionapp.UI.LoginProfileFragment"
+        android:label="fragment_login_profile"
+        tools:layout="@layout/fragment_login_profile" />
+    <action
+        android:id="@+id/action_global_profileFragment2"
+        app:destination="@id/profileFragment"
+        app:popUpToInclusive="true" />
 </navigation>

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/btnResgiterBack"
+                android:id="@+id/btnLoginBack"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_back"
@@ -40,10 +40,10 @@
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnResgiterBack" />
+                app:layout_constraintTop_toBottomOf="@+id/btnLoginBack" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtRegisterEmail"
+                android:id="@+id/edtLoginEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,10 +66,11 @@
                     android:fontFamily="sans-serif"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edtRegisterPassword"
+                android:id="@+id/edtLoginPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +84,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtRegisterEmail"
+                app:layout_constraintTop_toBottomOf="@+id/edtLoginEmail"
                 app:startIconDrawable="@drawable/ic_padlock"
                 app:startIconTint="@color/black">
 
@@ -96,7 +97,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
@@ -105,7 +105,7 @@
             android:layout_marginTop="10dp">
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/chkRememberMe"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

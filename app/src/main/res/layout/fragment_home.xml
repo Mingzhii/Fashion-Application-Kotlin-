@@ -24,6 +24,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <TextView

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
 import androidx.fragment.app.Fragment
@@ -83,3 +84,4 @@ fun ImageView.cropToBlob(width: Int, height: Int): Blob {
 fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
     Snackbar.make(this, message, duration).show()
 }
+

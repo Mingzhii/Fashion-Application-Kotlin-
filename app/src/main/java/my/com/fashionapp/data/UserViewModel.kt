@@ -7,11 +7,13 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import java.net.PasswordAuthentication
 
 class UserViewModel : ViewModel() {
 
     private val col= Firebase.firestore.collection("users")
     private val users = MutableLiveData<List<User>>()
+
     private val userLiveData = MutableLiveData<User>()
     private var listener: ListenerRegistration? = null
 
@@ -22,14 +24,15 @@ class UserViewModel : ViewModel() {
         listener?.remove()
     }
 
+    // Return observable live data
     fun getUserLiveDate(): LiveData<User> {
         return userLiveData
     }
 
+    // Return user from live data
     fun getUser(): User? {
         return userLiveData.value
     }
-
 
 
     //init block will always run before the constructor
@@ -39,6 +42,10 @@ class UserViewModel : ViewModel() {
 
     fun get(id : String): User?{
         return users.value?.find { u -> u.userId == id }
+    }
+
+    fun getUserPhoto(userName : String): User?{
+        return users.value?.find { u -> u.userName == userName }
     }
 
     fun getAll() = users
@@ -55,16 +62,59 @@ class UserViewModel : ViewModel() {
         col.document(u.userId).set(u)
     }
 
-    private fun nameExists(name: String): Boolean {
-        return users.value?.any{ u -> u.userName == name } ?: false
-    }
+    fun calSize() = users.value?.size ?: 0
 
-    private fun phoneExists(phone: Int): Boolean {
-        return users.value?.any { u -> u.phoneNumber == phone } ?: false
-    }
 
     //-------------------------------------------------------------------
     // Validation
 
+    private fun nameExists(name: String): Boolean {
+        return users.value?.any{ u -> u.userName == name } ?: false
+    }
 
+    private fun phoneExists(phone: String): Boolean {
+        return users.value?.any { u -> u.phoneNumber == phone } ?: false
+    }
+
+    private fun emailExists(email: String): Boolean {
+        return users.value?.any{ u -> u.email == email } ?: false
+    }
+
+    fun validation(email: String, password: String): String {
+        var e = ""
+
+        //Email
+        e += if (email == "") "- Email Address is required. \n"
+        else if (emailExists(email)) "- Email Address is Duplicated. \n"
+        else ""
+
+        //Password
+        e += if (password == "") "- Password is required. \n"
+        else ""
+
+        return e
+    }
+
+
+    fun validate(u: User, insert: Boolean = true): String {
+
+        var e = ""
+
+        //name
+        e += if (u.userName == "") "- Username is required.\n"
+        else if (u.userName.length < 3) "- Username is too short.\n"
+        else if (nameExists(u.userName)) "- Username is duplicated.\n"
+        else ""
+
+        //Phone Number
+        e += if (u.phoneNumber.toString() == "") "- Phone Number is required.\n"
+        else if (phoneExists(u.phoneNumber)) "- Phone Number is used.\n"
+        else ""
+
+        //Photo
+        e += if (u.userPhoto.toBytes().isEmpty()) "- Photo is required.\n"
+        else ""
+
+        return e
+    }
 }

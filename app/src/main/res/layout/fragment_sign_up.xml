@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/btnResgiterBack"
+                android:id="@+id/btnRegisterBack"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/ic_back"
@@ -40,7 +40,7 @@
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnResgiterBack" />
+                app:layout_constraintTop_toBottomOf="@+id/btnRegisterBack" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtRegisterEmail"
