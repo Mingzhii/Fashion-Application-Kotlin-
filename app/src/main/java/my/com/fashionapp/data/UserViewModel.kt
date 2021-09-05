@@ -17,6 +17,10 @@ class UserViewModel : ViewModel() {
     private val userLiveData = MutableLiveData<User>()
     private var listener: ListenerRegistration? = null
 
+    //init block will always run before the constructor
+    init {
+        col.addSnapshotListener { snap, _ -> users.value = snap?.toObjects()  }
+    }
 
     // Remove snapshot listener when view model is destroyed
     override fun onCleared() {
@@ -34,18 +38,16 @@ class UserViewModel : ViewModel() {
         return userLiveData.value
     }
 
-
-    //init block will always run before the constructor
-    init {
-        col.addSnapshotListener { snap, _ -> users.value = snap?.toObjects()  }
-    }
-
     fun get(id : String): User?{
         return users.value?.find { u -> u.userId == id }
     }
 
     fun getUserPhoto(userName : String): User?{
         return users.value?.find { u -> u.userName == userName }
+    }
+
+    fun getUserPhoto2(email: String): User?{
+        return users.value?.find { u -> u.email == email }
     }
 
     fun getAll() = users
@@ -63,7 +65,6 @@ class UserViewModel : ViewModel() {
     }
 
     fun calSize() = users.value?.size ?: 0
-
 
     //-------------------------------------------------------------------
     // Validation

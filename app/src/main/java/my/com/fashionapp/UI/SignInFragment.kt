@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +26,7 @@ class SignInFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+        vm.getAll()
         binding = FragmentSignInBinding.inflate(inflater, container, false)
 
         // TODO
@@ -32,7 +35,7 @@ class SignInFragment : Fragment() {
         binding.btnLoginBack.setOnClickListener { nav.navigate(R.id.action_global_profileFragment2) }
 
         binding.btnForgetPassword.setOnClickListener {
-            //TODO
+        //TODO
         }
         // Check Box Remember Me need to do
 
@@ -43,12 +46,11 @@ class SignInFragment : Fragment() {
             // Sign In using FirebaseAuth
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { t ->
-
                     if(t.isSuccessful){
-                        //Navigation
-                        val err = "Done"
-                        errorDialog(err)
-
+                        val args = bundleOf(
+                            "email" to email
+                        )
+                        nav.navigate(R.id.loginProfileFragment, args)
                     }
                     else{
                         // Validation and error
@@ -57,7 +59,6 @@ class SignInFragment : Fragment() {
                     }
                 }
         }
-
         return binding.root
     }
 

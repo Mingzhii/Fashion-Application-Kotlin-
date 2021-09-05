@@ -53,9 +53,9 @@ class SetUpProfileFragment : Fragment() {
 
     private fun submit() {
         //TODO
-        val id = "USER00"
+        val id = "USER00" + (vm.calSize() + 1).toString()
         val u = User(
-            userId = id + vm.calSize().toString() + 1,
+            userId = id,
             email = email,
             password = password,
             userName = binding.edtUserName.editText?.text.toString().trim(),
@@ -69,16 +69,10 @@ class SetUpProfileFragment : Fragment() {
         if (err != ""){
             errorDialog(err)
             return
-
         }else{
             vm.set(u)
 
-            val userName = binding.edtUserName.editText?.text.toString().trim()
-            val userPhoto = binding.imgUserPic.cropToBlob(300,300)
-            val args = bundleOf(
-                "userName" to userName,
-            )
-            nav.navigate(R.id.loginProfileFragment, args)
+            nav.navigate(R.id.signInFragment)
         }
 
 

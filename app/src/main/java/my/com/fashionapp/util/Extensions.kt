@@ -1,27 +1,48 @@
 package my.com.fashionapp.util
 
 import android.app.AlertDialog
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
 import androidx.fragment.app.Fragment
+import my.com.fashionapp.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.Blob
-import my.com.fashionapp.R
 import java.io.ByteArrayOutputStream
 
-
+// Usage: Show an error dialog from fragment
 fun Fragment.errorDialog(text: String) {
     AlertDialog.Builder(context)
-        .setIcon(R.drawable.ic_close)
+        .setIcon(R.drawable.ic_error)
         .setTitle("Error")
         .setMessage(text)
         .setPositiveButton("Dismiss", null)
         .show()
+}
+
+// Usage: Show an information dialog from fragment
+fun Fragment.informationDialog(text: String) {
+    AlertDialog.Builder(context)
+        .setIcon(R.drawable.ic_info)
+        .setTitle("Information")
+        .setMessage(text)
+        .setPositiveButton("Dismiss", null)
+        .show()
+}
+
+// Usage: Show a snackbar from fragment
+fun Fragment.snackbar(text: String) {
+    Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT).show()
+}
+
+// Usage: Hide keyboard from fragment
+fun Fragment.hideKeyboard() {
+    val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 }
 
 // Usage: Crop and resize bitmap (upscale)
@@ -80,8 +101,3 @@ fun ImageView.cropToBlob(width: Int, height: Int): Blob {
     else
         return this.drawable.toBitmap().crop(width, height).toBlob()
 }
-
-fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
-    Snackbar.make(this, message, duration).show()
-}
-

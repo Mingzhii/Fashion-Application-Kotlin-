@@ -21,19 +21,16 @@ class LoginProfileFragment : Fragment() {
     private lateinit var binding: FragmentLoginProfileBinding
     private val nav by lazy{ findNavController() }
     private val vm: UserViewModel by activityViewModels()
-    private val userName by lazy { requireArguments().getString("userName", "N/A") }
+    private val email by lazy { requireArguments().getString("email", "N/A") }
+    private val id by lazy { requireArguments().getString("id", "N/A")}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLoginProfileBinding.inflate(inflater, container, false)
 
         // TODO
-        val u = vm.getUserPhoto(userName)
+        getImage()
 
-
-        if (u != null) {
-            load(u)
-        }
 
 
         // Sign Out Method haven't test yer
@@ -56,11 +53,25 @@ class LoginProfileFragment : Fragment() {
             true
         }
 
-
         return binding.root
     }
 
+    private fun getImage() {
+        if(email != null){
+            val u = vm.getUserPhoto2(email)
+            if (u != null){
+                load(u)
+            }
+        } else if (id != null){
+            val u = vm.get(id)
+            if (u != null){
+                load(u)
+            }
+        }
+    }
+
     private fun load (u: User){
+
         binding.imgUserPic.setImageBitmap(u.userPhoto.toBitmap())
         binding.txtUsername.text = u.userName
     }

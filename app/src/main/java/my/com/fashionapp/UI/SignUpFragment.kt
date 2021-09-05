@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.FirebaseAuth
 import my.com.fashionapp.data.ProductViewModel
 import my.com.fashionapp.data.UserViewModel
-import my.com.fashionapp.util.snack
+
 
 class SignUpFragment : Fragment() {
 
@@ -34,6 +34,8 @@ class SignUpFragment : Fragment() {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
 
         // TODO
+        vm.getAll()
+
         binding.btnRegisterBack.setOnClickListener { nav.navigate(R.id.action_global_profileFragment2) }
 
         binding.txtLogin.setOnClickListener { nav.navigate(R.id.signInFragment) }
@@ -48,25 +50,25 @@ class SignUpFragment : Fragment() {
                 "password" to password,
             )
 
-            val err = vm.validation(email,password)
-            if (err != ""){
-                errorDialog(err)
-            } else {
+//            val err = vm.validation(email,password)
+//            if (err != ""){
+//                errorDialog(err)
+//            } else {
 
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(
-                        OnCompleteListener<AuthResult>{ t ->
-                            if (t.isSuccessful) {
-                                val firebaseUser: FirebaseUser = t.result!!.user!!
-
-                                nav.navigate(R.id.setUpProfileFragment, args)
-
-                            }
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(
+                    OnCompleteListener<AuthResult>{ t ->
+                        if (t.isSuccessful) {
+                            val firebaseUser: FirebaseUser = t.result!!.user!!
+                            nav.navigate(R.id.setUpProfileFragment, args)
+                        } else{
+                            val err = t.exception!!.message.toString()
+                            errorDialog(err)
                         }
-                    )
-                }
+                    }
+                )
             }
-
+//          }
         return binding.root
     }
 
