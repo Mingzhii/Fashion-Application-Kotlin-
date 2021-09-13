@@ -21,6 +21,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.nav_home -> nav.navigate(R.id.homeFragment)
+                R.id.nav_like -> nav.navigate(R.id.likeFragment)
+                R.id.nav_search -> nav.navigate(R.id.searchFragment)
+                R.id.nav_shop -> nav.navigate(R.id.shopFragment)
+                R.id.nav_profile -> nav.navigate(R.id.profileFragment)
+            }
+            true
+        }
+
         // TODO
 //        val homeFragment = HomeFragment()
 //        val likeFragment = LikeFragment()

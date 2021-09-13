@@ -13,11 +13,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import my.com.fashionapp.R
 import my.com.fashionapp.data.ProductViewModel
-import my.com.fashionapp.data.User
+
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentSetUpProfileBinding
 import my.com.fashionapp.util.cropToBlob
 import my.com.fashionapp.util.errorDialog
+import my.com.fashionappstaff.data.User
 
 class SetUpProfileFragment : Fragment() {
 
@@ -62,6 +63,7 @@ class SetUpProfileFragment : Fragment() {
             phoneNumber = binding.edtPhoneNumber.editText?.text.toString(),
             userPhoto = binding.imgUserPic.cropToBlob(300,300),
             homeAddress = binding.edtHomeAddress.editText?.text.toString(),
+            userPoint = 0,
             userType = "User"
         )
 
@@ -74,7 +76,6 @@ class SetUpProfileFragment : Fragment() {
 
             nav.navigate(R.id.signInFragment)
         }
-
 
     }
 

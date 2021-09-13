@@ -35,11 +35,6 @@
         android:name="my.com.fashionapp.UI.SignUpFragment"
         android:label="Sign Up Page"
         tools:layout="@layout/fragment_sign_up" />
-    <fragment
-        android:id="@+id/insertProductFragment"
-        android:name="my.com.fashionapp.UI.insertProductFragment"
-        android:label="Insert Product Page"
-        tools:layout="@layout/fragment_insert_product" />
     <action
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment"
@@ -64,4 +59,19 @@
         android:id="@+id/action_global_profileFragment2"
         app:destination="@id/profileFragment"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="my.com.fashionapp.UI.ForgetPasswordFragment"
+        android:label="fragment_forget_password"
+        tools:layout="@layout/fragment_forget_password" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="my.com.fashionapp.UI.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="my.com.fashionapp.UI.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
 </navigation>

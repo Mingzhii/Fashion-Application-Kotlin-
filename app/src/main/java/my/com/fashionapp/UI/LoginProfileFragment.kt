@@ -11,10 +11,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import my.com.fashionapp.R
-import my.com.fashionapp.data.User
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentLoginProfileBinding
 import my.com.fashionapp.util.toBitmap
+import my.com.fashionappstaff.data.User
 
 class LoginProfileFragment : Fragment() {
 
@@ -40,18 +40,6 @@ class LoginProfileFragment : Fragment() {
         }
 
         // Navigation
-        binding.bottomNavigation.selectedItemId = R.id.nav_profile
-
-        binding.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_home -> nav.navigate(R.id.homeFragment)
-                R.id.nav_like -> nav.navigate(R.id.likeFragment)
-                R.id.nav_search -> nav.navigate(R.id.searchFragment)
-                R.id.nav_shop -> nav.navigate(R.id.shopFragment)
-                R.id.nav_profile -> nav.navigate(R.id.loginProfileFragment)
-            }
-            true
-        }
 
         return binding.root
     }

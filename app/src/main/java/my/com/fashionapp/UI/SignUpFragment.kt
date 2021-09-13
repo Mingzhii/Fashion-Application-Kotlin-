@@ -40,7 +40,7 @@ class SignUpFragment : Fragment() {
 
         binding.txtLogin.setOnClickListener { nav.navigate(R.id.signInFragment) }
 
-        binding.btnRegister.setOnClickListener {
+        binding.btnSubmit.setOnClickListener {
 
             val email = binding.edtRegisterEmail.editText?.text.toString().trim()
             val password = binding.edtRegisterPassword.editText?.text.toString().trim()
@@ -49,11 +49,6 @@ class SignUpFragment : Fragment() {
                 "email" to email,
                 "password" to password,
             )
-
-//            val err = vm.validation(email,password)
-//            if (err != ""){
-//                errorDialog(err)
-//            } else {
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(

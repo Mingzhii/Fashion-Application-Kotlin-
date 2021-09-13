@@ -7,6 +7,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import my.com.fashionappstaff.data.User
 import java.net.PasswordAuthentication
 
 class UserViewModel : ViewModel() {
@@ -40,6 +41,10 @@ class UserViewModel : ViewModel() {
 
     fun get(id : String): User?{
         return users.value?.find { u -> u.userId == id }
+    }
+
+    fun getEmail(email: String): User?{
+        return users.value?.find { u -> u.email == email }
     }
 
     fun getUserPhoto(userName : String): User?{

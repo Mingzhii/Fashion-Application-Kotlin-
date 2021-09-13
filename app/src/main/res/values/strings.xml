@@ -40,5 +40,6 @@
     <string name="enter_username">Enter Username</string>
     <string name="enter_password">Enter Password</string>
     <string name="remember_me">Remember Me</string>
-    <string name="forget_password">forget Password</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="add_to_cart">Add To Cart</string>
 </resources>
