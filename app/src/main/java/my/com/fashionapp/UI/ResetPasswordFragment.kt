@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentForgetPasswordBinding
@@ -23,7 +24,8 @@ class ResetPasswordFragment : Fragment() {
         // Inflate the layout for this fragment
         binding  = FragmentResetPasswordBinding.inflate(inflater, container, false)
 
-
+        val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+        btn.visibility = View.GONE
 
         return binding.root
     }

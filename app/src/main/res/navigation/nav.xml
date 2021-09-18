@@ -74,4 +74,46 @@
         android:name="my.com.fashionapp.UI.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="my.com.fashionapp.UI.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_loginProfileFragment"
+            app:destination="@id/loginProfileFragment"
+            app:popUpTo="@id/loginProfileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/payByCardFragment"
+        android:name="my.com.fashionapp.UI.PayByCardFragment"
+        android:label="fragment_pay_by_card"
+        tools:layout="@layout/fragment_pay_by_card" />
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="my.com.fashionapp.UI.PaymentMethodFragment"
+        android:label="fragment_payment_method"
+        tools:layout="@layout/fragment_payment_method" />
+    <fragment
+        android:id="@+id/rewardFragment"
+        android:name="my.com.fashionapp.UI.RewardFragment"
+        android:label="fragment_reward"
+        tools:layout="@layout/fragment_reward" />
+    <fragment
+        android:id="@+id/rewardDetailFragment"
+        android:name="my.com.fashionapp.UI.RewardDetailFragment"
+        android:label="fragment_reward_detail"
+        tools:layout="@layout/fragment_reward_detail" />
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="my.com.fashionapp.UI.PaymentHistoryFragment"
+        android:label="fragment_payment_history"
+        tools:layout="@layout/fragment_payment_history" >
+        <action
+            android:id="@+id/action_paymentHistoryFragment_to_loginProfileFragment"
+            app:destination="@id/loginProfileFragment"
+            app:popUpTo="@id/loginProfileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

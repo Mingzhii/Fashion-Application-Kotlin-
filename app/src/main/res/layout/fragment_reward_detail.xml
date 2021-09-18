@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ProductDetailFragment">
+    tools:context=".UI.RewardDetailFragment" >
 
     <ImageView
-        android:id="@+id/imgProductDetail"
+        android:id="@+id/imgRewardDetailPic"
         android:layout_width="0dp"
         android:layout_height="350dp"
         android:scaleType="centerCrop"
@@ -85,7 +85,7 @@
                 app:strokeWidth="1dp" />
 
             <TextView
-                android:id="@+id/txtProductDetailName"
+                android:id="@+id/txtRewardDetailName"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="30dp"
@@ -100,7 +100,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtProductDetailPrice"
+                android:id="@+id/txtRewardDetailPoint"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -113,7 +113,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtProductDetailDescription"
+                android:id="@+id/txtRewardDetailDescription"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="30dp"
@@ -124,7 +124,7 @@
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtProductDetailName" />
+                app:layout_constraintTop_toBottomOf="@+id/txtRewardDetailName" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -136,7 +136,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtProductDetailDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/txtRewardDetailDescription" />
 
             <Button
                 android:id="@+id/btnSizeS"
@@ -152,13 +152,13 @@
                 app:strokeWidth="1dp" />
 
             <Button
-                android:id="@+id/btnAddToCart"
+                android:id="@+id/btnRewardDetialClaim"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:backgroundTint="#000000"
-                android:text="@string/add_to_cart"
+                android:text="Claim"
                 android:textColor="#FFFFFF"
                 app:icon="@drawable/ic_cart"
                 app:iconGravity="textStart"
@@ -172,15 +172,16 @@
                 android:id="@+id/txtSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="124dp"
                 android:layout_marginTop="20dp"
                 android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/txtProductDetailDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/txtRewardDetailDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imgProductDetailBack"
+        android:id="@+id/imgRewardDetailBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -191,6 +192,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/Circular" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

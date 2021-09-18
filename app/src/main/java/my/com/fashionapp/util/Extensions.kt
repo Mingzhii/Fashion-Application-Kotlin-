@@ -2,9 +2,13 @@ package my.com.fashionapp.util
 
 import android.app.AlertDialog
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
@@ -101,3 +105,28 @@ fun ImageView.cropToBlob(width: Int, height: Int): Blob {
     else
         return this.drawable.toBitmap().crop(width, height).toBlob()
 }
+//
+//fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+//    this.addTextChangedListener(object : TextWatcher {
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//        }
+//
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//        }
+//
+//        override fun afterTextChanged(editable: Editable?) {
+//            var initial = editable.toString()
+//            // remove all non-digits characters
+//            var processed = initial.replace("\\D", "")
+//            // insert a space after all groups of 4 digits that are followed by another digit
+//            processed = processed.replace("(\\d{4})(?=\\d)", "$1 ")
+//            // to avoid stackoverflow errors, check that the processed is different from what's already
+//            //  there before setting
+//            if (!initial.equals(processed)) {
+//                // set the value
+//                editable?.replace(0, initial.length, processed);
+//            }
+//            afterTextChanged.invoke(editable.toString())
+//        }
+//    })
+//}

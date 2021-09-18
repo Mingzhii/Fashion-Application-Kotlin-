@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
 import my.com.fashionapp.data.ProductViewModel
 
@@ -40,6 +41,9 @@ class SetUpProfileFragment : Fragment() {
 
         // TODO
 
+        val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+        btn.visibility = View.GONE
+
         binding.imgUserPic.setOnClickListener { selectImage() }
         binding.btnDone.setOnClickListener { submit() }
 
@@ -54,16 +58,17 @@ class SetUpProfileFragment : Fragment() {
 
     private fun submit() {
         //TODO
-        val id = "USER00" + (vm.calSize() + 1).toString()
+        var chkID = vm.validID()
+
         val u = User(
-            userId = id,
+            userId = chkID,
             email = email,
             password = password,
             userName = binding.edtUserName.editText?.text.toString().trim(),
             phoneNumber = binding.edtPhoneNumber.editText?.text.toString(),
             userPhoto = binding.imgUserPic.cropToBlob(300,300),
             homeAddress = binding.edtHomeAddress.editText?.text.toString(),
-            userPoint = 0,
+            userPoint = 0.0,
             userType = "User"
         )
 

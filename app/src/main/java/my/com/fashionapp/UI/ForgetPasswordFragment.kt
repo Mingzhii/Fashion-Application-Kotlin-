@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import my.com.fashionapp.R
@@ -31,6 +32,9 @@ class ForgetPasswordFragment : Fragment() {
 
         // TODO
         vm.getAll()
+
+        val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+        btn.visibility = View.GONE
 
 //        val n  = (0..999999).random()
 //        val fmt = DecimalFormat("000000")
@@ -114,7 +118,7 @@ class ForgetPasswordFragment : Fragment() {
 //        binding.btnRequestOTP.isEnabled = false
 //
 //    }
-//
+////
 //    private fun isEmail(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 //    private fun snackbar(text: String) {
 //        Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT).show()

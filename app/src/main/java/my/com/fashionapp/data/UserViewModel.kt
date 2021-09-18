@@ -1,13 +1,18 @@
 package my.com.fashionapp.data
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
+import my.com.fashionapp.R
 import my.com.fashionappstaff.data.User
+import my.com.fashionappstaff.data.emailAdress
 import java.net.PasswordAuthentication
 
 class UserViewModel : ViewModel() {
@@ -86,6 +91,45 @@ class UserViewModel : ViewModel() {
         return users.value?.any{ u -> u.email == email } ?: false
     }
 
+    private fun idExists(id: String): Boolean {
+        return users.value?.any{ u -> u.userId == id } ?: false
+    }
+
+    fun validID(): String {
+        var newID: String
+
+        val getLastUser = users.value?.lastOrNull()?.userId.toString()
+        val num: String = getLastUser.substringAfterLast("USER10")
+        newID = "USER10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "USER1010") {
+            newID = "USER1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calSize()) {
+            0 -> {
+                newID = "USER10" + (calSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastUser = users.value?.lastOrNull()?.userId.toString()
+                val num: String = getLastUser.substringAfterLast("USER10")
+                newID = "USER10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "USER10null") {
+                    newID = "USER111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastUser = users.value?.lastOrNull()?.userId.toString()
+                val num: String = getLastUser.substringAfterLast("USER1")
+                newID = "USER1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
+        }
+    }
+
     fun validation(email: String, password: String): String {
         var e = ""
 
@@ -123,4 +167,5 @@ class UserViewModel : ViewModel() {
 
         return e
     }
+
 }

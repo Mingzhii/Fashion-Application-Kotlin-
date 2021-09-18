@@ -46,6 +46,59 @@ class ProductViewModel : ViewModel() {
         return products.value?.any{ p -> p.productName == name } ?: false
     }
 
+    private fun idExists(id: String): Boolean {
+        return products.value?.any{ p -> p.productId == id } ?: false
+    }
+
+    fun validID(id: String): String {
+        val newID: String
+        val getLastCart = products.value?.lastOrNull()?.productId.toString()
+
+        return if (idExists(id)) {
+            val num: String = getLastCart.substringAfterLast("PROD")
+            newID = "PROD" + (num.toIntOrNull()?.plus(1)).toString()
+            newID
+        } else {
+            newID = "PROD" + (calSize() + 1).toString()
+            newID
+        }
+    }
+
+    fun validID(): String {
+        var newID: String
+
+        val getLastProduct = products.value?.lastOrNull()?.productId.toString()
+        val num: String = getLastProduct.substringAfterLast("PROD10")
+        newID = "PROD10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "PROD1010") {
+            newID = "PROD1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calSize()) {
+            0 -> {
+                newID = "PROD10" + (calSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastProduct = products.value?.lastOrNull()?.productId.toString()
+                val num: String = getLastProduct.substringAfterLast("PROD10")
+                newID = "PROD10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "PROD10null") {
+                    newID = "PROD111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastProduct = products.value?.lastOrNull()?.productId.toString()
+                val num: String = getLastProduct.substringAfterLast("PROD1")
+                newID = "PROD1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
+        }
+    }
+
     fun validate(p: Product, insert: Boolean = true): String {
 //        val regexId = Regex("""^[0-9A-Z]{4}$""")
         var e = ""

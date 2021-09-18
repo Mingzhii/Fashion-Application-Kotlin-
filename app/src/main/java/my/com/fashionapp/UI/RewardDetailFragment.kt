@@ -1,7 +1,9 @@
 package my.com.fashionapp.UI
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
-import android.graphics.drawable.DrawableWrapper
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,41 +13,39 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
-import my.com.fashionapp.data.CartViewModel
-import my.com.fashionapp.data.ProductViewModel
+import my.com.fashionapp.data.ClaimViewModel
+import my.com.fashionapp.data.RewardViewModel
 import my.com.fashionapp.data.UserViewModel
-import my.com.fashionapp.databinding.FragmentProductDetailBinding
-import my.com.fashionapp.util.cropToBlob
+import my.com.fashionapp.databinding.FragmentRewardDetailBinding
 import my.com.fashionapp.util.errorDialog
-import my.com.fashionapp.util.informationDialog
 import my.com.fashionapp.util.toBitmap
-import my.com.fashionappstaff.data.Cart
+import my.com.fashionappstaff.data.ClaimHistory
+import my.com.fashionappstaff.data.User
 import my.com.fashionappstaff.data.emailAdress
-import my.com.fashionappstaff.data.username
 
 
-class ProductDetailFragment : Fragment() {
+class RewardDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentProductDetailBinding
+    private lateinit var binding: FragmentRewardDetailBinding
     private val nav by lazy{ findNavController() }
-    private val vm : ProductViewModel by activityViewModels()
-    private val vmC: CartViewModel by activityViewModels()
     private val vmU : UserViewModel by activityViewModels()
+    private val vmR : RewardViewModel by activityViewModels()
+    private val vmCh : ClaimViewModel by activityViewModels()
 
     private val id by lazy { requireArguments().getString("id", "N/A") }
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        binding = FragmentRewardDetailBinding.inflate(inflater, container, false)
 
-        binding = FragmentProductDetailBinding.inflate(inflater, container, false)
-
+        // TODO
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
 
-        // TODO
         detail()
-        binding.imgProductDetailBack.setOnClickListener { nav.navigateUp() }
-        binding.btnAddToCart.setOnClickListener { addToCart() }
+        binding.imgRewardDetailBack.setOnClickListener { nav.navigateUp() }
+        binding.btnRewardDetialClaim.setOnClickListener { claim() }
         binding.btnSizeXS.setOnClickListener {
             binding.txtSize.text = binding.btnSizeXS.text
             it.setBackgroundColor(Color.rgb(225, 155, 155))
@@ -91,73 +91,100 @@ class ProductDetailFragment : Fragment() {
             binding.btnSizeL.setBackgroundColor(Color.rgb(250,250,250))
         }
 
+
         return binding.root
-    }
-
-    private fun addToCart() {
-
-        val p = vm.get(id)
-        val productPrice = p?.productPrice
-        val u = vmU.getEmail(emailAdress)
-        val userName = u?.userName
-
-        if (emailAdress == "" && username == ""){
-            val err = "You Haven't Sign in An Account. \n"
-            errorDialog(err)
-        } else {
-            if (p?.productQuan != 0){
-
-                if (binding.txtSize.text != "" ){
-                    var chkID = vmC.validID()
-                    //ATC = Added To Cart
-                    //PTP = Process To Payment
-                    //DTP = Done The Payment
-                    val c = Cart(
-                        cartID = chkID,
-                        cartUsername = userName.toString(),
-                        cartProductID = id,
-                        cartProductName = binding.txtProductDetailName.text.toString(),
-                        cartProductQuantity = 1,
-                        cartProductPrice = productPrice.toString().toDouble(),
-                        cartProductSize = binding.txtSize.text.toString(),
-                        cartProductPhoto = binding.imgProductDetail.cropToBlob(300,300),
-                        cartStatus = "Added To Cart",
-                    )
-                    val inform = " Product has added to cart. \n"
-                    informationDialog(inform)
-                    vmC.set(c)
-                    nav.navigate(R.id.action_global_homeFragment)
-                }else{
-                    val err = " Select the Size of Product. \n"
-                    errorDialog(err)
-                }
-            } else {
-                val err = " Out Of Stock\n"
-                errorDialog(err)
-            }
-
-        }
-        binding.btnSizeXS.setBackgroundColor(Color.rgb(250,250,250))
-        binding.btnSizeS.setBackgroundColor(Color.rgb(250,250,250))
-        binding.btnSizeM.setBackgroundColor(Color.rgb(250,250,250))
-        binding.btnSizeL.setBackgroundColor(Color.rgb(250,250,250))
-        binding.btnSizeXL.setBackgroundColor(Color.rgb(250,250,250))
     }
 
     private fun detail() {
 
-        val p = vm.get(id)
-        if (p == null){
+        val r = vmR.get(id)
+        if (r == null){
             nav.navigateUp()
             return
         }
 
-        binding.imgProductDetail.setImageBitmap(p.productPhoto.toBitmap())
-        binding.txtProductDetailName.setText(p.productName)
-        binding.txtProductDetailPrice.setText("RM %.2f".format(p.productPrice))
-        binding.txtProductDetailDescription.setText(p.productDescrip)
+        binding.imgRewardDetailPic.setImageBitmap(r.rewardPhoto.toBitmap())
+        binding.txtRewardDetailName.setText(r.rewardName)
+        binding.txtRewardDetailPoint.setText("%.2f".format(r.rewardPoint))
+        binding.txtRewardDetailDescription.setText(r.rewardDescrip)
 
     }
 
+    private fun claim() {
+
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
+
+        val r = vmR.get(id)
+        val u = emailLogin?.let { vmU.getEmail(it) }
+        val userName = u?.userName
+
+        if (r?.rewardQuan != 0){
+
+            if(u!!.userPoint >= r!!.rewardPoint){
+
+                if (binding.txtSize.text != "" ){
+                    var chkID = vmCh.validID()
+
+                    val uPoint = u.userPoint
+                    val rPoint = r.rewardPoint
+
+                    val totalPoint = uPoint - rPoint
+
+                    val ch = ClaimHistory(
+                        claimHistoryID =  chkID,
+                        claimRewardName = r.rewardName,
+                        claimRewardQuantity = 1,
+                        claimRewardPoint = r.rewardPoint,
+                        claimRewardImage = r.rewardPhoto,
+                        username  = u.userName,
+                    )
+
+                    val u = User(
+                        userId = u.userId,
+                        email = u.email,
+                        password = u.password,
+                        userName = u.userName,
+                        phoneNumber = u.phoneNumber,
+                        userPhoto = u.userPhoto,
+                        homeAddress = u.homeAddress,
+                        userPoint = totalPoint,
+                        userType = u.userType
+                    )
+
+                    inform("Are you sure want to claim this reward ? ", ch, u)
+
+
+                }else{
+                    val err = " Select the Size of Reward. \n"
+                    errorDialog(err)
+                }
+            } else {
+                var err = " Not Enough Point. \n"
+                errorDialog(err)
+            }
+        } else {
+            val err = " Out Of Stock\n"
+            errorDialog(err)
+        }
+
+
+    }
+
+    fun Fragment.inform(text: String, ch: ClaimHistory, u: User) {
+        AlertDialog.Builder(context)
+            .setTitle("Information")
+            .setMessage(text)
+            .setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
+                vmCh.set(ch)
+                vmU.set(u)
+                nav.navigate(R.id.rewardFragment)
+                dialog.cancel()
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
+                dialog.cancel()
+            })
+            .show()
+    }
 
 }

@@ -29,19 +29,6 @@ class ProfileFragment : Fragment() {
 
         binding.btnLoginProfile2.setOnClickListener { nav.navigate(R.id.signInFragment) }
 
-        binding.bottomNavigation.selectedItemId = R.id.nav_profile
-
-        binding.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
-                R.id.nav_like -> nav.navigate(R.id.likeFragment)
-                R.id.nav_search -> nav.navigate(R.id.searchFragment)
-                R.id.nav_shop -> nav.navigate(R.id.shopFragment)
-                R.id.nav_profile -> nav.navigate(R.id.profileFragment)
-            }
-            true
-        }
-
 
 
         return binding.root
