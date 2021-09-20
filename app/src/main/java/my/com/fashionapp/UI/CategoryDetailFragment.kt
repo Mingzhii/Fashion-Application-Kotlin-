@@ -58,7 +58,7 @@ class CategoryDetailFragment : Fragment() {
         vm.getResult().observe(viewLifecycleOwner) { list ->
 
             val productArray = list.filter { p ->
-                p.productCategory == category
+                p.productCategory == category && p.productQuan != 0
             }
             adapter.submitList(productArray)
 //            binding.txtItem.text = "${list.size} product(s)"

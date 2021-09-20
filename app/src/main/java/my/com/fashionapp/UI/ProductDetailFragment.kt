@@ -1,5 +1,6 @@
 package my.com.fashionapp.UI
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.DrawableWrapper
 import android.os.Bundle
@@ -96,12 +97,15 @@ class ProductDetailFragment : Fragment() {
 
     private fun addToCart() {
 
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
+
         val p = vm.get(id)
         val productPrice = p?.productPrice
-        val u = vmU.getEmail(emailAdress)
+        val u = emailLogin?.let { vmU.getEmail(it) }
         val userName = u?.userName
 
-        if (emailAdress == "" && username == ""){
+        if (emailLogin == "" && username == ""){
             val err = "You Haven't Sign in An Account. \n"
             errorDialog(err)
         } else {

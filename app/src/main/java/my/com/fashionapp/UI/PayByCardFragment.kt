@@ -25,6 +25,7 @@ import java.text.DecimalFormat
 import android.R.attr.divider
 
 import android.R.attr.digits
+import android.content.Context
 import androidx.core.view.isEmpty
 import com.google.firebase.firestore.Blob
 import my.com.fashionapp.data.CartViewModel
@@ -122,7 +123,10 @@ class PayByCardFragment : Fragment() {
 
     private fun pay(OTP: String) {
 
-        val u = vmU.getEmail(emailAdress)
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
+
+        val u = emailLogin?.let { vmU.getEmail(it) }
 
         val uId = u?.userId
 
@@ -184,7 +188,10 @@ class PayByCardFragment : Fragment() {
 
                 }
 
-                val user = vmU.getEmail(emailAdress)
+                val user = emailLogin?.let { vmU.getEmail(it) }
+                val point = binding.txtPointEarn.text.toString().toDouble()
+                val userpoint = user?.userPoint
+                val totalpoint = userpoint?.plus(point)
 
                 val u = user?.let {
                     User(
@@ -195,7 +202,7 @@ class PayByCardFragment : Fragment() {
                         phoneNumber = it.phoneNumber,
                         userPhoto = it.userPhoto,
                         homeAddress = it.homeAddress,
-                        userPoint = binding.txtPointEarn.text.toString().toDouble(),
+                        userPoint = totalpoint!!.toDouble(),
                         userType = it.userType
                     )
                 }
@@ -227,6 +234,9 @@ class PayByCardFragment : Fragment() {
 
     private fun sendOTP(OTP: String) {
 
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
+
         if(binding.txtCardNumber.editText?.text.isNullOrEmpty()){
             errorDialog("Card Number Cannot Be Empty, Please Fill In")
         }
@@ -234,9 +244,11 @@ class PayByCardFragment : Fragment() {
 
             binding.txtOTPCode.isEnabled = true
 
-            val email = emailAdress
+            val email = emailLogin
 
-            send(email, OTP)
+            if (email != null) {
+                send(email, OTP)
+            }
 
         }
     }
@@ -244,6 +256,7 @@ class PayByCardFragment : Fragment() {
     private fun send(email: String, OTP: String) {
 
         hideKeyboard()
+
 
         val subject = "Your OTP Code"
         val content = """

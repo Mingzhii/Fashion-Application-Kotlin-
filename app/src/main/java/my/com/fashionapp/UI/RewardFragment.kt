@@ -62,7 +62,10 @@ class RewardFragment : Fragment() {
         binding.rv.adapter = adapter
 
         vmR.getAll().observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
+            val arrayReward = list.filter { r ->
+                r.rewardQuan != 0
+            }
+            adapter.submitList(arrayReward)
         }
 
 

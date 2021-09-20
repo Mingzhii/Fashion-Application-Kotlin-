@@ -51,7 +51,10 @@ class HomeFragment : Fragment() {
 //        binding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         vm.getAll().observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
+            val arrayPro = list.filter { p ->
+                p.productQuan != 0
+            }
+            adapter.submitList(arrayPro)
 //            binding.txtItem.text = "${list.size} product(s)"
         }
 
