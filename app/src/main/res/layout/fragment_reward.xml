@@ -69,4 +69,15 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/txtUserPoint"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <ImageView
+        android:id="@+id/imgRewardBag"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/ic_bag"
+        app:layout_constraintBottom_toBottomOf="@+id/textView29"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView29"
+        app:tint="#000000" />
 </androidx.constraintlayout.widget.ConstraintLayout>

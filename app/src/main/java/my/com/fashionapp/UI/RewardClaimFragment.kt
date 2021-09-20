@@ -11,49 +11,42 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
-import my.com.fashionapp.data.ProductViewModel
+import my.com.fashionapp.data.ClaimViewModel
 import my.com.fashionapp.data.RewardViewModel
 import my.com.fashionapp.data.UserViewModel
-import my.com.fashionapp.databinding.FragmentRewardBinding
-import my.com.fashionapp.util.ProductAdapter
+import my.com.fashionapp.databinding.FragmentRewardClaimBinding
 import my.com.fashionapp.util.RewardAdapter
-import my.com.fashionappstaff.data.emailAdress
+import my.com.fashionapp.util.RewardHistoryAdapter
 
+class RewardClaimFragment : Fragment() {
 
-class RewardFragment : Fragment() {
-
-    private lateinit var binding: FragmentRewardBinding
+    private lateinit var binding: FragmentRewardClaimBinding
     private val nav by lazy{ findNavController() }
     private val vmU: UserViewModel by activityViewModels()
-    private val vmR: RewardViewModel by activityViewModels()
+    private val vmC: ClaimViewModel by activityViewModels()
 
-    private lateinit var adapter: RewardAdapter
+    private lateinit var adapter: RewardHistoryAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentRewardBinding.inflate(inflater, container, false)
 
-        // TODO
+        binding = FragmentRewardClaimBinding.inflate(inflater, container, false)
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
 
-        binding.imgRewardBack.setOnClickListener { nav.navigate(R.id.loginProfileFragment) }
-        binding.imgRewardBag.setOnClickListener { nav.navigate(R.id.rewardClaimFragment) }
+        binding.imgRewardBack2.setOnClickListener { nav.navigate(R.id.rewardFragment) }
 
         val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 
         val u = emailLogin?.let { vmU.getEmail(it) }
 
-        if (u != null) {
-            binding.txtUserPoint.setText(u.userPoint.toString())
-        }
+        val username = u?.userName
 
-        adapter = RewardAdapter() { holder, reward ->
+        adapter = RewardHistoryAdapter() { holder, ClaimHistory ->
             // Item click
             holder.root.setOnClickListener {
-                nav.navigate(R.id.rewardDetailFragment, bundleOf("id" to reward.rewardID))
+//                nav.navigate(R.id.rewardDetailFragment, bundleOf("id" to reward.rewardID))
             }
 //             Delete button click
 //            holder.btnDelete.setOnClickListener { delete(product.productId) }
@@ -61,14 +54,16 @@ class RewardFragment : Fragment() {
 
         binding.rv.adapter = adapter
 
-        vmR.getAll().observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
+        vmC.getAll().observe(viewLifecycleOwner) { list ->
+
+            val arrayHistory = list.filter { c ->
+                c.username == username
+            }
+            adapter.submitList(arrayHistory)
         }
 
 
         return binding.root
     }
-
-
 
 }

@@ -36,23 +36,34 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener {
             if(email == ""){
                 when (it.itemId) {
-                    R.id.nav_home -> nav.navigate(R.id.homeFragment)
-                    R.id.nav_like -> nav.navigate(R.id.likeFragment)
-                    R.id.nav_search -> nav.navigate(R.id.searchFragment)
-                    R.id.nav_shop -> nav.navigate(R.id.shopFragment)
-                    R.id.nav_profile -> nav.navigate(R.id.profileFragment)
+                    R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
+                    R.id.nav_shop -> nav.navigate(R.id.action_global_categoryFragment)
+                    R.id.nav_profile -> nav.navigate(R.id.action_global_profileFragment2)
                 }
             } else {
                 when (it.itemId) {
-                    R.id.nav_home -> nav.navigate(R.id.homeFragment)
-                    R.id.nav_like -> nav.navigate(R.id.likeFragment)
-                    R.id.nav_search -> nav.navigate(R.id.searchFragment)
-                    R.id.nav_shop -> nav.navigate(R.id.shopFragment)
-                    R.id.nav_profile -> nav.navigate(R.id.loginProfileFragment)
+                    R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
+                    R.id.nav_shop -> nav.navigate(R.id.action_global_categoryFragment)
+                    R.id.nav_profile -> nav.navigate(R.id.action_global_loginProfileFragment)
                 }
             }
             true
         }
+    }
+
+    override fun onBackPressed() {
+
+        val num = nav.currentDestination?.label
+
+        when(num){
+            "fragment_home"          -> super.finish()
+            "fragment_category"      -> super.finish()
+            "fragment_profile"       -> super.finish()
+            "fragment_login_profile" -> super.finish()
+        }
+
+        nav.popBackStack()
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

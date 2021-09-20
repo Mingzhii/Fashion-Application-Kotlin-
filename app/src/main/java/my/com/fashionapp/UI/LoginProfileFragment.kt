@@ -1,14 +1,13 @@
 package my.com.fashionapp.UI
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,27 +34,31 @@ class LoginProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLoginProfileBinding.inflate(inflater, container, false)
+        vm.getAll()
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
 
         // TODO
-        getImage()
+        getImage(emailLogin)
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
-
 
         // Sign Out Method haven't test yer
         binding.conLayLogout.setOnClickListener { logout() }
         binding.conLayCart.setOnClickListener { nav.navigate(R.id.cartFragment) }
         binding.conLayReward.setOnClickListener { nav.navigate(R.id.rewardFragment) }
         binding.conLayHistory.setOnClickListener { nav.navigate(R.id.paymentHistoryFragment) }
+        binding.conLayProfile.setOnClickListener { nav.navigate(R.id.updateUserProfileFragment) }
+        binding.conLayResetPass.setOnClickListener { nav.navigate(R.id.resetPasswordFragment, bundleOf("email" to emailLogin)) }
 
         // Navigation
 
         return binding.root
     }
 
-    private fun getImage() {
-        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
-        val emailLogin = preferences?.getString("emailLogin","")
+    private fun getImage(emailLogin: String?) {
+//        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+//        val emailLogin = preferences?.getString("emailLogin","")
 
         if(emailLogin != "") {
             val u = emailLogin?.let { vm.getUserPhoto2(it) }
@@ -87,8 +90,7 @@ class LoginProfileFragment : Fragment() {
         btn.selectedItemId = R.id.nav_home
 
         FirebaseAuth.getInstance().signOut()
-        val ctx = requireActivity()
-//        vm.logout(ctx)
+
         nav.navigate(R.id.action_global_homeFragment)
 
         return true
@@ -96,8 +98,21 @@ class LoginProfileFragment : Fragment() {
 
     private fun load (u: User){
 
-        binding.imgUserPic.setImageBitmap(u.userPhoto.toBitmap())
-        binding.txtUsername.text = u.userName
+        if (img == Blob.fromBytes(ByteArray(0)) && username == ""){
+            if(u != null){
+                binding.imgUserPic.setImageBitmap(u.userPhoto.toBitmap())
+                binding.txtUsername.text = u.userName
+            }
+        }else if(img == Blob.fromBytes(ByteArray(0))){
+            if(u != null){
+                binding.imgUserPic.setImageBitmap(u.userPhoto.toBitmap())
+                binding.txtUsername.text = username
+            }
+        }else{
+            binding.imgUserPic.setImageBitmap(img.toBitmap())
+            binding.txtUsername.text = username
+        }
+
     }
 
 

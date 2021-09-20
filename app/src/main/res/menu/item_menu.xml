@@ -5,17 +5,10 @@
         android:title="@string/home"
         android:icon="@drawable/ic_home" />
 
-    <item android:id="@+id/nav_like"
-        android:title="@string/like"
-        android:icon="@drawable/ic_like" />
-
-    <item android:id="@+id/nav_search"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search" />
-
-    <item android:id="@+id/nav_shop"
-        android:title="@string/shop"
-        android:icon="@drawable/ic_shop" />
+    <item
+        android:id="@+id/nav_shop"
+        android:icon="@drawable/ic_shop"
+        android:title="@string/shop" />
 
     <item android:id="@+id/nav_profile"
         android:title="@string/profile"

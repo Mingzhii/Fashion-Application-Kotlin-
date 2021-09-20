@@ -49,9 +49,7 @@ class SignInFragment : Fragment() {
 
         binding.btnLoginBack.setOnClickListener { nav.navigate(R.id.action_global_profileFragment2) }
 
-        binding.btnForgetPassword.setOnClickListener {
-        //TODO
-        }
+        binding.btnForgetPassword.setOnClickListener { nav.navigate(R.id.forgetPasswordFragment) }
         // Check Box Remember Me need to do
         binding.chkRememberMe.setOnCheckedChangeListener { compoundButton, b ->
             if(compoundButton.isChecked){
@@ -68,7 +66,17 @@ class SignInFragment : Fragment() {
             }
         }
 
-        binding.btnLogin.setOnClickListener { login() }
+        binding.btnLogin.setOnClickListener {
+            val email = binding.edtLoginEmail.editText?.text.toString().trim()
+            val password = binding.edtLoginPassword.editText?.text.toString().trim()
+
+            if (email == "" && password == "") {
+                val err = "Email and Password cannot be empty !"
+                errorDialog(err)
+            } else {
+                login()
+            }
+        }
         return binding.root
     }
 
@@ -86,20 +94,24 @@ class SignInFragment : Fragment() {
                         username = u.userName
                         username
                     }
-
+                    if (u?.userType == "User"){
                     val sharedPref = activity?.getSharedPreferences("email", MODE_PRIVATE)
                     val editor : SharedPreferences.Editor = sharedPref!!.edit()
                     editor.putString("emailLogin",email)
                     editor.apply()
-
                     val test = requireActivity() as MainActivity
                     test.navi(emailAdress)
-
-
                     val args = bundleOf(
                         "email" to email
                     )
-                    nav.navigate(R.id.homeFragment, args)
+                        nav.navigate(R.id.homeFragment, args)
+
+                    } else {
+                        val err = "You do not have no permission ! "
+                        errorDialog(err)
+                        binding.edtLoginPassword.editText?.text?.clear()
+                    }
+
                 }
                 else{
                     // Validation and error

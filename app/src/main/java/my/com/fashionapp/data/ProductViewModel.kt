@@ -11,10 +11,35 @@ class ProductViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("products")
     private val products = MutableLiveData<List<Product>>()
+    private var searchPro = listOf<Product>()
+    private val result = MutableLiveData<List<Product>>()
+    private var name = "" // for searching purpose
 
     init {
-        col.addSnapshotListener { snap, _ -> products.value = snap?.toObjects()  }
+        col.addSnapshotListener { snap, _ -> products.value = snap?.toObjects()
+            searchPro = snap!!.toObjects<Product>()
+            updateResult() }
+
     }
+
+    // Search
+    fun search(name: String){
+        this.name = name
+        updateResult()
+    }
+
+    private fun updateResult() {
+        var list = searchPro
+
+        //Search
+        list = list.filter {
+            it.productName.contains(name, true)
+        }
+
+        result.value = list
+    }
+
+    fun getResult() = result
 
     fun get(id : String): Product?{
         return products.value?.find { p -> p.productId == id }

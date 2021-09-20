@@ -20,8 +20,8 @@ import my.com.fashionapp.databinding.FragmentRewardDetailBinding
 import my.com.fashionapp.util.errorDialog
 import my.com.fashionapp.util.toBitmap
 import my.com.fashionappstaff.data.ClaimHistory
+import my.com.fashionappstaff.data.Reward
 import my.com.fashionappstaff.data.User
-import my.com.fashionappstaff.data.emailAdress
 
 
 class RewardDetailFragment : Fragment() {
@@ -119,17 +119,28 @@ class RewardDetailFragment : Fragment() {
         val u = emailLogin?.let { vmU.getEmail(it) }
         val userName = u?.userName
 
+
         if (r?.rewardQuan != 0){
 
             if(u!!.userPoint >= r!!.rewardPoint){
 
                 if (binding.txtSize.text != "" ){
                     var chkID = vmCh.validID()
-
+                    val quan = r.rewardQuan - 1
                     val uPoint = u.userPoint
                     val rPoint = r.rewardPoint
 
                     val totalPoint = uPoint - rPoint
+
+                    val r = Reward(
+                        rewardID  = r.rewardID,
+                        rewardName    = r.rewardName,
+                        rewardDescrip  = r.rewardDescrip,
+                        rewardQuan    = quan,
+                        rewardPoint   = r.rewardPoint,
+                        expiryDate    = r.expiryDate,
+                        rewardPhoto   = r.rewardPhoto,
+                    )
 
                     val ch = ClaimHistory(
                         claimHistoryID =  chkID,
@@ -152,7 +163,7 @@ class RewardDetailFragment : Fragment() {
                         userType = u.userType
                     )
 
-                    inform("Are you sure want to claim this reward ? ", ch, u)
+                    inform("Are you sure want to claim this reward ? ", ch, u, r)
 
 
                 }else{
@@ -171,13 +182,14 @@ class RewardDetailFragment : Fragment() {
 
     }
 
-    fun Fragment.inform(text: String, ch: ClaimHistory, u: User) {
+    fun Fragment.inform(text: String, ch: ClaimHistory, u: User, r: Reward) {
         AlertDialog.Builder(context)
             .setTitle("Information")
             .setMessage(text)
             .setPositiveButton("Ok", DialogInterface.OnClickListener { dialog, which ->
                 vmCh.set(ch)
                 vmU.set(u)
+                vmR.set(r)
                 nav.navigate(R.id.rewardFragment)
                 dialog.cancel()
             })

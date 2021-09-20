@@ -143,6 +143,8 @@ class PayByCardFragment : Fragment() {
                     val cartProduct = checkOutArray[i].orderProductID
 
                     val product = vmPro.get(cartProduct)
+                    val quantity = product?.productQuan.toString().toInt()
+                    val totalquantity = quantity - cartProductQuantity
                     val cart = vmC.get(cartID)
 
                     val p = product?.let {
@@ -150,7 +152,7 @@ class PayByCardFragment : Fragment() {
                             productId      = it.productId,
                             productName    = it.productName,
                             productDescrip = it.productDescrip,
-                            productQuan    = it.productQuan - cartProductQuantity,
+                            productQuan    = totalquantity,
                             productPrice   = it.productPrice,
                             productCategory= it.productCategory,
                             productPhoto   = it.productPhoto,
