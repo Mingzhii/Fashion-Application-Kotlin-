@@ -80,4 +80,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView29"
         app:tint="#000000" />
+
+    <ImageView
+        android:id="@+id/imgQrCodeScanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_qr"
+        android:tint="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/textView29"
+        app:layout_constraintEnd_toStartOf="@+id/imgRewardBag"
+        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

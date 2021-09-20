@@ -1,6 +1,7 @@
 package my.com.fashionapp
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -22,13 +23,43 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val preferences = getSharedPreferences("email", Context.MODE_PRIVATE)
-        val emailLogin = preferences?.getString("emailLogin","")
 
 
-        if (emailLogin != null) {
-            navi(emailLogin)
+        val preferences1 = getSharedPreferences("checkBo", MODE_PRIVATE)
+        val checkbox = preferences1?.getString("remember","")
+
+        if (checkbox == "true") {
+            val preferences = getSharedPreferences("email", Context.MODE_PRIVATE)
+            val emailLogin = preferences?.getString("emailLogin","")
+
+            if (emailLogin != null) {
+                navi(emailLogin)
+            }
+            vm.getAll()
+            nav.navigate(R.id.homeFragment)
+
+        }else {
+
+            val sharedPref = getSharedPreferences("checkBo", Context.MODE_PRIVATE)
+            val editor : SharedPreferences.Editor = sharedPref!!.edit()
+            editor.putString("remember","false")
+            editor.apply()
+            val sharedPref1 = getSharedPreferences("email", Context.MODE_PRIVATE)
+            val editor1 : SharedPreferences.Editor = sharedPref1!!.edit()
+            editor1.putString("emailLogin","")
+            editor1.apply()
+            val email = ""
+
+            navi(email)
+
+            binding.bottomNavigation.selectedItemId = R.id.home
+
+
         }
+
+
+
+
     }
 
     fun navi(email: String) {

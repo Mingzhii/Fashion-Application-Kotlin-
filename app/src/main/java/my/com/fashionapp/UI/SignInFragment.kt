@@ -35,15 +35,6 @@ class SignInFragment : Fragment() {
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
 
-        val preferences = activity?.getSharedPreferences("checkBo", MODE_PRIVATE)
-        val checkbox = preferences?.getString("remember","")
-
-        if (checkbox == "true") {
-            vm.getAll()
-            nav.navigate(R.id.homeFragment)
-        }else if(checkbox == "false"){
-            super.onCreate(savedInstanceState)
-        }
 
         binding.txtRegister.setOnClickListener { nav.navigate(R.id.signUpFragment) }
 
@@ -51,7 +42,7 @@ class SignInFragment : Fragment() {
 
         binding.btnForgetPassword.setOnClickListener { nav.navigate(R.id.forgetPasswordFragment) }
         // Check Box Remember Me need to do
-        binding.chkRememberMe.setOnCheckedChangeListener { compoundButton, b ->
+        binding.chkRememberMe.setOnCheckedChangeListener { compoundButton, _ ->
             if(compoundButton.isChecked){
                 val sharedPref = activity?.getSharedPreferences("checkBo", MODE_PRIVATE)
                 val editor : SharedPreferences.Editor = sharedPref!!.edit()
@@ -83,6 +74,8 @@ class SignInFragment : Fragment() {
     private fun login(){
         val email = binding.edtLoginEmail.editText?.text.toString().trim()
         val password = binding.edtLoginPassword.editText?.text.toString().trim()
+        val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+        btn.selectedItemId = R.id.home
 
         // Sign In using FirebaseAuth
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
@@ -95,15 +88,18 @@ class SignInFragment : Fragment() {
                         username
                     }
                     if (u?.userType == "User"){
+
                     val sharedPref = activity?.getSharedPreferences("email", MODE_PRIVATE)
                     val editor : SharedPreferences.Editor = sharedPref!!.edit()
                     editor.putString("emailLogin",email)
                     editor.apply()
+
                     val test = requireActivity() as MainActivity
                     test.navi(emailAdress)
                     val args = bundleOf(
                         "email" to email
                     )
+
                         nav.navigate(R.id.homeFragment, args)
 
                     } else {

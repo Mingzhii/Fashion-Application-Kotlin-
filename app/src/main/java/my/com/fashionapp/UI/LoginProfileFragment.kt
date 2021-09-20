@@ -43,6 +43,7 @@ class LoginProfileFragment : Fragment() {
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
 
+
         // Sign Out Method haven't test yer
         binding.conLayLogout.setOnClickListener { logout() }
         binding.conLayCart.setOnClickListener { nav.navigate(R.id.cartFragment) }

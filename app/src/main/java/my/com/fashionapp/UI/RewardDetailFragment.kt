@@ -18,6 +18,7 @@ import my.com.fashionapp.data.RewardViewModel
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentRewardDetailBinding
 import my.com.fashionapp.util.errorDialog
+import my.com.fashionapp.util.generateQRCode
 import my.com.fashionapp.util.toBitmap
 import my.com.fashionappstaff.data.ClaimHistory
 import my.com.fashionappstaff.data.Reward
@@ -44,6 +45,8 @@ class RewardDetailFragment : Fragment() {
         btn.visibility = View.GONE
 
         detail()
+
+
         binding.imgRewardDetailBack.setOnClickListener { nav.navigateUp() }
         binding.btnRewardDetialClaim.setOnClickListener { claim() }
         binding.btnSizeXS.setOnClickListener {

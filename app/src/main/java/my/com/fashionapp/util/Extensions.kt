@@ -5,6 +5,7 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.DialogInterface
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
@@ -16,6 +17,9 @@ import androidx.fragment.app.Fragment
 import my.com.fashionapp.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.Blob
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
 import java.io.ByteArrayOutputStream
 
 // Usage: Show an error dialog from fragment
@@ -36,6 +40,23 @@ fun Fragment.informationDialog(text: String) {
         .setMessage(text)
         .setPositiveButton("Dismiss", null)
         .show()
+}
+
+fun generateQRCode(text: String): Bitmap {
+    val width = 500
+    val height = 500
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val codeWriter = MultiFormatWriter()
+    try{
+        val bitMatrix = codeWriter.encode(text, BarcodeFormat.QR_CODE, width, height)
+        for (x in 0 until width){
+            for (y in 0 until height){
+                bitmap.setPixel(x,y, if(bitMatrix[x,y]) Color.BLACK else Color.WHITE)
+            }
+        }
+    }catch (e: WriterException){
+    }
+    return bitmap
 }
 
 // Usage: Show a snackbar from fragment
@@ -105,28 +126,3 @@ fun ImageView.cropToBlob(width: Int, height: Int): Blob {
     else
         return this.drawable.toBitmap().crop(width, height).toBlob()
 }
-//
-//fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-//    this.addTextChangedListener(object : TextWatcher {
-//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//        }
-//
-//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//        }
-//
-//        override fun afterTextChanged(editable: Editable?) {
-//            var initial = editable.toString()
-//            // remove all non-digits characters
-//            var processed = initial.replace("\\D", "")
-//            // insert a space after all groups of 4 digits that are followed by another digit
-//            processed = processed.replace("(\\d{4})(?=\\d)", "$1 ")
-//            // to avoid stackoverflow errors, check that the processed is different from what's already
-//            //  there before setting
-//            if (!initial.equals(processed)) {
-//                // set the value
-//                editable?.replace(0, initial.length, processed);
-//            }
-//            afterTextChanged.invoke(editable.toString())
-//        }
-//    })
-//}
