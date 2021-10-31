@@ -43,6 +43,7 @@ class ProductDetailFragment : Fragment() {
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
 
+
         // TODO
         detail()
         binding.imgProductDetailBack.setOnClickListener { nav.navigateUp() }

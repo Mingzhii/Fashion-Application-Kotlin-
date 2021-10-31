@@ -270,7 +270,7 @@ class PayByCardFragment : Fragment() {
             .subject(subject)
             .content(content)
             .isHtml()
-            .send() {
+            .send {
                 snackbar("Sent")
                 binding.btnOTP.isEnabled = true
             }
