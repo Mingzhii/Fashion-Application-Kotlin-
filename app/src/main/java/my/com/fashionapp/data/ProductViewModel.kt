@@ -19,7 +19,6 @@ class ProductViewModel : ViewModel() {
         col.addSnapshotListener { snap, _ -> products.value = snap?.toObjects()
             searchPro = snap!!.toObjects<Product>()
             updateResult() }
-
     }
 
     // Search
@@ -41,7 +40,7 @@ class ProductViewModel : ViewModel() {
 
     fun getResult() = result
 
-    fun get(id : String): Product?{
+    fun get(id : String): Product ? {
         return products.value?.find { p -> p.productId == id }
     }
 
@@ -125,17 +124,7 @@ class ProductViewModel : ViewModel() {
     }
 
     fun validate(p: Product, insert: Boolean = true): String {
-//        val regexId = Regex("""^[0-9A-Z]{4}$""")
         var e = ""
-
-        //id
-//        if (insert) {
-//            e += if (f.id == "") "- Id is required.\n"
-//            else if (!f.id.matches(regexId)) "- Id format is invalid.\n"
-//            else if (idExists(f.id)) "- Id is duplicated.\n"
-//            else ""
-//        }
-
         //name
         e += if (p.productName == "") "- Product Name is required.\n"
         else if (p.productName.length < 3) "- Product Name is too short.\n"

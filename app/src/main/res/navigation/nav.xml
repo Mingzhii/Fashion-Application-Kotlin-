@@ -197,4 +197,9 @@
         app:destination="@id/loginProfileFragment"
         app:popUpTo="@id/loginProfileFragment"
         app:popUpToInclusive="true" />
+    <activity
+        android:id="@+id/razorActivity"
+        android:name="my.com.fashionapp.RazorActivity"
+        android:label="activity_razor"
+        tools:layout="@layout/activity_razor" />
 </navigation>

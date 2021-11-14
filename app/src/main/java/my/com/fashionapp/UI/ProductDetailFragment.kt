@@ -127,6 +127,8 @@ class ProductDetailFragment : Fragment() {
                         cartProductSize = binding.txtSize.text.toString(),
                         cartProductPhoto = binding.imgProductDetail.cropToBlob(300,300),
                         cartStatus = "Added To Cart",
+                        cartTotalPrice = productPrice.toString().toDouble(),
+                        cartCheck = "",
                     )
                     val inform = " Product has added to cart. \n"
                     informationDialog(inform)

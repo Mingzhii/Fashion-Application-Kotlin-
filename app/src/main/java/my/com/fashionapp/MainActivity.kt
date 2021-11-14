@@ -1,22 +1,19 @@
 package my.com.fashionapp
 
-import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.ActivityMainBinding
-import my.com.fashionappstaff.data.emailAdress
 
 class MainActivity : AppCompatActivity() {
-    
+
     private lateinit var binding: ActivityMainBinding
     private val vm: UserViewModel by viewModels()
-    private lateinit var abc: AppBarConfiguration
     private val nav by lazy { supportFragmentManager.findFragmentById(R.id.host)!!.findNavController() }
+
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +21,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         val preferences1 = getSharedPreferences("checkBo", MODE_PRIVATE)
         val checkbox = preferences1?.getString("remember","")
 
         if (checkbox == "true") {
-            val preferences = getSharedPreferences("email", Context.MODE_PRIVATE)
+            val preferences = getSharedPreferences("email", MODE_PRIVATE)
             val emailLogin = preferences?.getString("emailLogin","")
 
             if (emailLogin != null) {
@@ -40,11 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         }else {
 
-            val sharedPref = getSharedPreferences("checkBo", Context.MODE_PRIVATE)
+            val sharedPref = getSharedPreferences("checkBo", MODE_PRIVATE)
             val editor : SharedPreferences.Editor = sharedPref!!.edit()
             editor.putString("remember","false")
             editor.apply()
-            val sharedPref1 = getSharedPreferences("email", Context.MODE_PRIVATE)
+            val sharedPref1 = getSharedPreferences("email", MODE_PRIVATE)
             val editor1 : SharedPreferences.Editor = sharedPref1!!.edit()
             editor1.putString("emailLogin","")
             editor1.apply()
@@ -53,17 +49,10 @@ class MainActivity : AppCompatActivity() {
             navi(email)
 
             binding.bottomNavigation.selectedItemId = R.id.home
-
-
         }
-
-
-
-
     }
 
     fun navi(email: String) {
-
         binding.bottomNavigation.setOnItemSelectedListener {
             if(email == ""){
                 when (it.itemId) {
@@ -92,9 +81,7 @@ class MainActivity : AppCompatActivity() {
             "fragment_profile"       -> super.finish()
             "fragment_login_profile" -> super.finish()
         }
-
         nav.popBackStack()
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

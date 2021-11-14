@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Blob
 import my.com.fashionapp.MainActivity
 import my.com.fashionapp.R
+import my.com.fashionapp.data.CartViewModel
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentLoginProfileBinding
 import my.com.fashionapp.util.toBitmap
@@ -28,6 +29,7 @@ class LoginProfileFragment : Fragment() {
     private lateinit var binding: FragmentLoginProfileBinding
     private val nav by lazy{ findNavController() }
     private val vm: UserViewModel by activityViewModels()
+    private val vmC: CartViewModel by activityViewModels()
     private val email by lazy { requireArguments().getString("email", "N/A") }
     private val id by lazy { requireArguments().getString("id", "N/A")}
 
@@ -35,6 +37,7 @@ class LoginProfileFragment : Fragment() {
 
         binding = FragmentLoginProfileBinding.inflate(inflater, container, false)
         vm.getAll()
+        vmC.getAll()
         val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 

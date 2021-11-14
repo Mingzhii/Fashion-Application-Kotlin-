@@ -13,13 +13,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
 import my.com.fashionapp.data.CartViewModel
+import my.com.fashionapp.data.ProductViewModel
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentCartBinding
 import my.com.fashionapp.util.CartAdapter
-import my.com.fashionappstaff.data.OrderList
-import my.com.fashionappstaff.data.checkOutArray
-import my.com.fashionappstaff.data.totalPrice
-import my.com.fashionappstaff.data.username
+import my.com.fashionapp.util.informationDialog
+import my.com.fashionappstaff.data.*
 
 class CartFragment : Fragment() {
 
@@ -27,117 +26,126 @@ class CartFragment : Fragment() {
     private val nav by lazy{ findNavController() }
     private val vm: CartViewModel by activityViewModels()
     private val vmU: UserViewModel by activityViewModels()
+    private val vmP : ProductViewModel by activityViewModels()
 
     private lateinit var adapter: CartAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(inflater, container, false)
-
+        vm.getAll()
+        vmP.getAll()
         // TODO
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
-        var num = 0
-        var product = ""
 
         binding.imgCartBack.setOnClickListener { nav.navigate(R.id.action_cartFragment_to_loginProfileFragment) }
-
 
         var arrayPress = arrayListOf<OrderList>()
 
         adapter = CartAdapter() { holder, cart ->
 
-            // Item click
-//            holder.root.setOnClickListener {
-//                nav.navigate(R.id.productDetailFragment, bundleOf("id" to cart.cartID))
-//            }
             // Item Add
             holder.imgAdd.setOnClickListener {
-                val productPrice = cart.cartProductPrice
+
                 var add = holder.txtQuantity.text.toString().toInt() + 1
-                var totalPrice = productPrice * add.toString().toDouble()
-                holder.txtPrice.text = "%.2f".format(totalPrice)
-                holder.txtQuantity.text = add.toString()
+                val p = vmP.get(cart.cartProductID)
+
+                if (p?.productQuan!! >= add){
+                    val totalPrice = cart.cartProductPrice * add.toString().toDouble()
+                    holder.txtQuantity.text = add.toString()
+
+                    val c = Cart (
+                        cartID = cart.cartID,
+                        cartUsername = cart.cartUsername,
+                        cartProductID = cart.cartProductID,
+                        cartProductName = cart.cartProductName,
+                        cartProductQuantity = add,
+                        cartProductPrice = cart.cartProductPrice,
+                        cartProductSize = cart.cartProductSize,
+                        cartProductPhoto = cart.cartProductPhoto,
+                        cartStatus = cart.cartStatus,
+                        cartTotalPrice = String.format("%.2f",totalPrice).toDoubleOrNull() ?: 0.0,
+                        cartCheck = cart.cartCheck,
+                    )
+                    vm.set(c)
+                } else {
+                    val err = "The Product is reached the Maximum Quantity!! \n"
+                    informationDialog(err)
+                }
+
             }
 
             // Item Minus and Validation(need to do)
             holder.imgMinus.setOnClickListener {
-
                 var minus = holder.txtQuantity.text.toString().toInt() - 1
                 if (minus != 0){
-                    val productPrice = cart.cartProductPrice
-                    var totalPrice = holder.txtPrice.text.toString().toDouble() - cart.cartProductPrice
+                    val totalPrice = holder.txtPrice.text.toString().toDouble() - cart.cartProductPrice
                     holder.txtPrice.text = "%.2f".format(totalPrice)
                     holder.txtQuantity.text = minus.toString()
+                    val c = Cart (
+                        cartID = cart.cartID,
+                        cartUsername = cart.cartUsername,
+                        cartProductID = cart.cartProductID,
+                        cartProductName = cart.cartProductName,
+                        cartProductQuantity = minus,
+                        cartProductPrice = cart.cartProductPrice,
+                        cartProductSize = cart.cartProductSize,
+                        cartProductPhoto = cart.cartProductPhoto,
+                        cartStatus = cart.cartStatus,
+                        cartTotalPrice = String.format("%.2f",totalPrice).toDoubleOrNull() ?: 0.0,
+                        cartCheck = cart.cartCheck,
+                    )
+                    vm.set(c)
                 } else {
                     val err = " Do you want to delete the product ? \n"
                     deleteDialog(err, cart.cartID)
                 }
             }
-            holder.chkBox.setOnCheckedChangeListener { _, isChecked ->
 
-                if (isChecked) {
-                    var ol = OrderList(
-                        orderProductID = cart.cartProductID,
-                        orderCartID = cart.cartID,
-                        orderProductQuantity = holder.txtQuantity.text.toString().toInt(),
+            holder.chkBox.setOnClickListener {
+
+                if(holder.chkBox.isChecked){
+
+                    val c = Cart (
+                        cartID = cart.cartID,
+                        cartUsername = cart.cartUsername,
+                        cartProductID = cart.cartProductID,
+                        cartProductName = cart.cartProductName,
+                        cartProductQuantity = cart.cartProductQuantity,
+                        cartProductPrice = cart.cartProductPrice,
+                        cartProductSize = cart.cartProductSize,
+                        cartProductPhoto = cart.cartProductPhoto,
+                        cartStatus = cart.cartStatus,
+                        cartTotalPrice = cart.cartTotalPrice,
+                        cartCheck = "Checked",
                     )
-                    arrayPress.add(ol)
-                    num += 1
-                    var productPrice = holder.txtPrice.text.toString().toDouble()
-                    var totalPrice = binding.txtCartSubtotalPrice.text.toString().toDouble()
-                    var shipping = 5.0
-                    var subtotalprice = 0.0
-                    totalPrice += productPrice
-                    subtotalprice = totalPrice + shipping
-                    binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
-                    binding.txtCartShipping.text = "%.2f".format(shipping)
-                    binding.txtCartTotalPrice.text = "%.2f".format(subtotalprice)
+                    vm.set(c)
 
                 } else {
-
                     arrayPress.removeIf { c -> c.orderProductID == cart.cartProductID }
-                    num -= 1
-
-                    if (num == 0){
-
-                        var subtotalprice = 0.0
-                        var totalPrice = 0.0
-                        var shipping = 0.0
-                        binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
-                        binding.txtCartShipping.text = "%.2f".format(shipping)
-                        binding.txtCartTotalPrice.text = "%.2f".format(subtotalprice)
-
-                    } else {
-
-                        var productPrice = holder.txtPrice.text.toString().toDouble()
-                        var totalPrice = binding.txtCartSubtotalPrice.text.toString().toDouble()
-                        totalPrice -= productPrice
-
-                        if (totalPrice == 0.0) {
-                            var shipping = 0.0
-                            var subtotalprice = binding.txtCartTotalPrice.text.toString().toDouble()
-                            subtotalprice -= totalPrice
-                            binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
-                            binding.txtCartShipping.text = "%.2f".format(shipping)
-                            binding.txtCartTotalPrice.text = "%.2f".format(subtotalprice)
-//                            holder.chkBox.isChecked = false
-                        } else {
-                            var shipping = 5.0
-                            var subtotalprice = binding.txtCartTotalPrice.text.toString().toDouble()
-                            subtotalprice = totalPrice + shipping
-                            binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
-                            binding.txtCartTotalPrice.text = "%.2f".format(subtotalprice)
-//                            holder.chkBox.isChecked = false
-                        }
-                    }
-
+                    val c = Cart (
+                        cartID = cart.cartID,
+                        cartUsername = cart.cartUsername,
+                        cartProductID = cart.cartProductID,
+                        cartProductName = cart.cartProductName,
+                        cartProductQuantity = cart.cartProductQuantity,
+                        cartProductPrice = cart.cartProductPrice,
+                        cartProductSize = cart.cartProductSize,
+                        cartProductPhoto = cart.cartProductPhoto,
+                        cartStatus = cart.cartStatus,
+                        cartTotalPrice = cart.cartTotalPrice,
+                        cartCheck = "Unchecked",
+                    )
+                    vm.set(c)
                 }
 
             }
+
         }
 
         binding.rv.adapter = adapter
+
         val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 
@@ -145,9 +153,49 @@ class CartFragment : Fragment() {
 
         vm.getAll().observe(viewLifecycleOwner) { list ->
 
-            var cartArray = list.filter { c ->
+            val cartArray = list.filter { c ->
                 c.cartUsername == u?.userName && c.cartStatus != "Done The Payment"
             }
+
+            val caltotal = cartArray.filter { c ->
+                c.cartCheck == "Checked"
+            }
+            if(caltotal.isNotEmpty()){
+
+
+                var totalPrice = 0.0
+                val shipping = 5.0
+                var subTotal = 0.0
+
+                for(i in 0..caltotal.size - 1){
+
+                    val totalProductPrice = caltotal[i].cartTotalPrice
+                    totalPrice += totalProductPrice
+                    subTotal = totalPrice + 5.0
+
+                    var ol = OrderList(
+                        orderProductID = caltotal[i].cartProductID,
+                        orderCartID = caltotal[i].cartID,
+                        orderProductQuantity = caltotal[i].cartProductQuantity,
+                    )
+                    arrayPress.add(ol)
+                }
+
+                binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
+                binding.txtCartShipping.text = "%.2f".format(shipping)
+                binding.txtCartTotalPrice.text = "%.2f".format(subTotal)
+
+            } else {
+
+                val totalPrice = 0.0
+                val shipping = 0.0
+                val subTotal = 0.0
+
+                binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
+                binding.txtCartShipping.text = "%.2f".format(shipping)
+                binding.txtCartTotalPrice.text = "%.2f".format(subTotal)
+            }
+
             adapter.submitList(cartArray)
         }
 
@@ -157,19 +205,13 @@ class CartFragment : Fragment() {
     }
 
     private fun checkout(product: ArrayList<OrderList>) {
-        var num = product.size
-        num
 
         checkOutArray = product
 
-        var num2 = checkOutArray.size
-        num2
-
         totalPrice = binding.txtCartTotalPrice.text.toString().toDouble()
 
-        nav.navigate(R.id.paymentMethodFragment)
+        nav.navigate(R.id.razorActivity)
     }
-
 
     fun Fragment.deleteDialog(text: String, cartID: String) {
         AlertDialog.Builder(context)

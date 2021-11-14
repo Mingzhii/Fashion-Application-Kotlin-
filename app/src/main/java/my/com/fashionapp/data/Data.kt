@@ -2,6 +2,9 @@ package my.com.fashionappstaff.data
 
 import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.DocumentId
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -59,6 +62,8 @@ data class Cart (
     var cartProductSize : String = "",
     var cartProductPhoto:  Blob = Blob.fromBytes(ByteArray(0)),
     var cartStatus : String = "",
+    var cartTotalPrice : Double = 0.0,
+    var cartCheck : String = "",
 )
 
 data class OrderList (
@@ -85,4 +90,14 @@ data class ClaimHistory (
     var claimRewardPoint : Double = 0.0,
     var claimRewardImage : Blob = Blob.fromBytes(ByteArray(0)),
     var username : String = "",
+)
+
+data class Order (
+    @DocumentId
+    var orderId : String = "",
+    var orderProduct : String = "",
+    var orderDate : Date = Date(),
+    var orderShipping : String = "",
+    var orderTotalPrice : Double = 0.0,
+    var orderPaymentId : String = "",
 )
