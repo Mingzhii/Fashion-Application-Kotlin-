@@ -203,6 +203,7 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
             orderProductQuantity = orderProductQuantity,
             orderShipping = user.homeAddress,
             orderPaymentId = payid,
+            orderStatus = "",
         )
 
         vmO.set(o)

@@ -104,6 +104,7 @@ data class Order (
     var orderDate : String = formatDate,
     var orderShipping : String = "",
     var orderPaymentId : String = "",
+    var orderStatus : String = "",
 )
 
 data class Voucher (
