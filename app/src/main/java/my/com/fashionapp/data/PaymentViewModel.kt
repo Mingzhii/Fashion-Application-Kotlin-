@@ -8,31 +8,31 @@ import com.google.firebase.ktx.Firebase
 import my.com.fashionappstaff.data.Payment
 import my.com.fashionappstaff.data.User
 
-class PaymentViewModel : ViewModel(){
+class PaymentViewModel : ViewModel() {
 
-    private val col= Firebase.firestore.collection("payments")
+    private val col = Firebase.firestore.collection("payments")
     private val payments = MutableLiveData<List<Payment>>()
 
     //init block will always run before the constructor
     init {
-        col.addSnapshotListener { snap, _ -> payments.value = snap?.toObjects()  }
+        col.addSnapshotListener { snap, _ -> payments.value = snap?.toObjects() }
     }
 
-    fun get(id : String): Payment?{
+    fun get(id: String): Payment? {
         return payments.value?.find { p -> p.paymentID == id }
     }
 
     fun getAll() = payments
 
-    fun delete(id : String){
+    fun delete(id: String) {
         col.document(id).delete()
     }
 
-    fun deleteAll(){
-        payments.value?.forEach{ p -> delete(p.paymentID)}
+    fun deleteAll() {
+        payments.value?.forEach { p -> delete(p.paymentID) }
     }
 
-    fun set(p: Payment){
+    fun set(p: Payment) {
         col.document(p.paymentID).set(p)
     }
 
@@ -42,7 +42,7 @@ class PaymentViewModel : ViewModel(){
     //-----------------------------------
 
     private fun idExists(id: String): Boolean {
-        return payments.value?.any{ p -> p.paymentID == id } ?: false
+        return payments.value?.any { p -> p.paymentID == id } ?: false
     }
 
     fun validID(): String {
@@ -79,5 +79,4 @@ class PaymentViewModel : ViewModel(){
             }
         }
     }
-
 }

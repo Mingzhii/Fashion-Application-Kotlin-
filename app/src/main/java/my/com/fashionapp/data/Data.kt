@@ -92,12 +92,35 @@ data class ClaimHistory (
     var username : String = "",
 )
 
+val currentDate = LocalDate.now()
+val viewFormatter = DateTimeFormatter.ofPattern("dd MMM, YYYY")
+val formatDate = viewFormatter.format(currentDate)
+
 data class Order (
     @DocumentId
     var orderId : String = "",
     var orderProduct : String = "",
-    var orderDate : Date = Date(),
+    var orderProductQuantity: String = "",
+    var orderDate : String = formatDate,
     var orderShipping : String = "",
-    var orderTotalPrice : Double = 0.0,
     var orderPaymentId : String = "",
+)
+
+data class Voucher (
+    @DocumentId
+    var voucherId : String = "",
+    var voucherDescription : String = "",
+    var voucherQuantity : Int = 0,
+    var voucherExpiryDate : String = formatDate,
+    var voucherValue : Int = 0,
+)
+
+data class VoucherClaim (
+    @DocumentId
+    var voucherId : String = "",
+    var claimUser : String = "",
+    var voucherQuantity : Int = 0,
+    var voucherExpiryDate : String = formatDate,
+    var voucherValue : Int = 0,
+    var voucherStatus : String = "",
 )

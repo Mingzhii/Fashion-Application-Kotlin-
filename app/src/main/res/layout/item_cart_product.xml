@@ -8,13 +8,11 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgCartProduct"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="108dp"
+        android:layout_height="92dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearance="@style/RoundedSquare"
@@ -23,32 +21,30 @@
     <TextView
         android:id="@+id/txtCartProductName"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:text="TextView"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgCartProduct"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TextView" />
 
     <TextView
         android:id="@+id/txtCartProductPrice"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="TextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:textColor="#F3C12E"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/txtCartProductName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCartProductName"
+        tools:text="TextView" />
 
     <Button
         android:id="@+id/btnCartProductSize"
@@ -68,8 +64,8 @@
 
     <TextView
         android:id="@+id/txtCartProductQuantity"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:gravity="center"
@@ -93,12 +89,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgCartProduct"
         app:layout_constraintEnd_toStartOf="@+id/imgCartProduct"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgCartProduct" />
+        app:layout_constraintTop_toTopOf="@+id/imgCartProduct"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/imgbtnMinus"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_corner2"
@@ -108,8 +105,8 @@
 
     <ImageButton
         android:id="@+id/imgbtnAdd"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_corner2"
@@ -124,11 +121,12 @@
         android:layout_marginStart="20dp"
         android:text="RM"
         android:textColor="#F3C12E"
-        android:textSize="16sp"
+        android:textSize="12dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/txtCartProductPrice"
         app:layout_constraintStart_toEndOf="@+id/imgCartProduct"
-        app:layout_constraintTop_toTopOf="@+id/txtCartProductPrice" />
+        app:layout_constraintTop_toTopOf="@+id/txtCartProductPrice"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

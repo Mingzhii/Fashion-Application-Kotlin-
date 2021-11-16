@@ -12,10 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import kotlinx.android.synthetic.main.activity_razor.*
-import my.com.fashionapp.data.CartViewModel
-import my.com.fashionapp.data.PaymentViewModel
-import my.com.fashionapp.data.ProductViewModel
-import my.com.fashionapp.data.UserViewModel
+import my.com.fashionapp.data.*
 import my.com.fashionapp.databinding.ActivityRazorBinding
 import my.com.fashionappstaff.data.*
 import org.json.JSONObject
@@ -26,6 +23,7 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
     private val vmU: UserViewModel by viewModels()
     private val vmC: CartViewModel by viewModels()
     private val vmP: PaymentViewModel by viewModels()
+    private val vmO: OrderViewModel by viewModels()
     private val vmPro : ProductViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -179,10 +177,38 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
         )
         vmP.set(p)
 
+        var orderProduct = ""
+        var orderProductQuantity = ""
+
+        for (i in 0 until checkOutArray.size) {
+
+            val cartProductQuantity = checkOutArray[i].orderProductQuantity.toString()
+            val cartProduct = checkOutArray[i].orderProductID
+            orderProduct += cartProduct + ","
+            orderProductQuantity += cartProductQuantity + ","
+
+        }
+//        orderProduct
+//
+//        val divide = ","
+//
+//        val list = orderProduct.split(divide)
+//
+//        list.size
+
+        val order = vmO.validID()
+        val o = Order(
+            orderId = order,
+            orderProduct = orderProduct,
+            orderProductQuantity = orderProductQuantity,
+            orderShipping = user.homeAddress,
+            orderPaymentId = payid,
+        )
+
+        vmO.set(o)
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-
 
     }
 }

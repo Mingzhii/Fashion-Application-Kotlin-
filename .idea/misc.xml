@@ -8,10 +8,14 @@
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/activity_stripe.xml" value="0.25" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_cart.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_checkout_stripe.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_order_history.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_payment_history.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_payment_method.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_payment_razorpay.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_product_detail.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_shop.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_cart_product.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_order.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/xml/network_security_config.xml" value="0.27447916666666666" />
       </map>
     </option>

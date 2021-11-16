@@ -166,6 +166,7 @@ class CartFragment : Fragment() {
                 var totalPrice = 0.0
                 val shipping = 5.0
                 var subTotal = 0.0
+                arrayPress.clear()
 
                 for(i in 0..caltotal.size - 1){
 
@@ -179,6 +180,7 @@ class CartFragment : Fragment() {
                         orderProductQuantity = caltotal[i].cartProductQuantity,
                     )
                     arrayPress.add(ol)
+                    arrayPress.size
                 }
 
                 binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
