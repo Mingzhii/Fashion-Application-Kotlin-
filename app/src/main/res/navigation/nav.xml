@@ -254,4 +254,9 @@
         android:id="@+id/deliveryProductDetailFragment"
         android:name="my.com.fashionapp.UI.DeliveryProductDetailFragment"
         android:label="DeliveryProductDetailFragment" />
+    <fragment
+        android:id="@+id/voucherFragment"
+        android:name="my.com.fashionapp.UI.VoucherFragment"
+        android:label="fragment_voucher"
+        tools:layout="@layout/fragment_voucher" />
 </navigation>
