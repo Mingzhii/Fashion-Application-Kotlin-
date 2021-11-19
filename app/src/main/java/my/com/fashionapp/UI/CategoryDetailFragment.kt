@@ -62,8 +62,13 @@ class CategoryDetailFragment : Fragment() {
             }
             adapter.submitList(productArray)
 //            binding.txtItem.text = "${list.size} product(s)"
-        }
 
+            if(category == "Men"){
+                binding.textView34.setText("Men");
+            }else{
+                binding.textView34.setText("Women");
+            }
+        }
 
         return binding.root
     }

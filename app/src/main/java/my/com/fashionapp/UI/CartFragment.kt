@@ -203,6 +203,14 @@ class CartFragment : Fragment() {
 
         binding.btnCheckOut.setOnClickListener { checkout(arrayPress) }
 
+        vm.getAll().observe(viewLifecycleOwner) { list ->
+            adapter.submitList(list)
+
+            if(list.isEmpty()){
+                nav.navigate(R.id.emptyCartLogin)
+            }
+        }
+
         return binding.root
     }
 

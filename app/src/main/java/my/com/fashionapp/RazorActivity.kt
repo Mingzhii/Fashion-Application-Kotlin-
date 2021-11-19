@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import kotlinx.android.synthetic.main.activity_razor.*
@@ -87,6 +84,7 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
         val preferences = this.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 
+
         for(i in 0 until checkOutArray.size) {
 
             val cartID = checkOutArray[i].orderCartID
@@ -132,7 +130,7 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
                     cartStatus = "Done The Payment",
                     cartCheck = "",
 
-                )
+                    )
             }
 
             if (c != null) {
@@ -173,6 +171,7 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
             userName = user!!.userName,
             paymentMethod = "Pay By Card",
             totalPrice = totalPrice,
+            phoneNo = user.phoneNumber
 
         )
         vmP.set(p)
@@ -196,14 +195,18 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
 //
 //        list.size
 
-        val order = vmO.validID()
+        val orderid = vmO.validID()
         val o = Order(
-            orderId = order,
+            orderId = orderid,
             orderProduct = orderProduct,
             orderProductQuantity = orderProductQuantity,
+            orderProductTotalPrice = totalPrice.toString(),
+//            orderProductSize = cart.cartProductSize,
             orderShipping = user.homeAddress,
+            orderUserName = user.userName,
+            orderUserPhone = user.phoneNumber,
             orderPaymentId = payid,
-            orderStatus = "",
+            orderStatus = "Paid",
         )
 
         vmO.set(o)

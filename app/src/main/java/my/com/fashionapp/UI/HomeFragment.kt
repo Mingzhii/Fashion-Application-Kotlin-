@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -39,10 +40,19 @@ class HomeFragment : Fragment() {
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
 
+        vm.search("")
+        binding.edtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(name: String) = true
+            override fun onQueryTextChange(name: String): Boolean {
+                vm.search(name)
+                return true
+            }
+        })
+
         adapter = ProductAdapter() { holder, product ->
             // Item click
             holder.root.setOnClickListener {
-               nav.navigate(R.id.productDetailFragment, bundleOf("id" to product.productId))
+                nav.navigate(R.id.productDetailFragment, bundleOf("id" to product.productId))
             }
 
         }
@@ -50,11 +60,14 @@ class HomeFragment : Fragment() {
         binding.rv.adapter = adapter
 //        binding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        vm.getAll().observe(viewLifecycleOwner) { list ->
-            val arrayPro = list.filter { p ->
+        binding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+        vm.getResult().observe(viewLifecycleOwner) { list ->
+
+            val productArray = list.filter { p ->
                 p.productQuan != 0
             }
-            adapter.submitList(arrayPro)
+            adapter.submitList(productArray)
 //            binding.txtItem.text = "${list.size} product(s)"
         }
 

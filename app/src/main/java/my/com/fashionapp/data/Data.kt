@@ -8,9 +8,6 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-
-//try
-
 var emailAdress : String = ""
 var username : String = ""
 var img : Blob = Blob.fromBytes(ByteArray(0))
@@ -82,6 +79,7 @@ data class Payment (
     var userName  : String = "",
     var paymentMethod : String = "",
     var totalPrice    : Double = 0.0,
+    var phoneNo : String = "",
     var paymentDate   : Date = Date(),
 )
 
@@ -104,8 +102,12 @@ data class Order (
     var orderId : String = "",
     var orderProduct : String = "",
     var orderProductQuantity: String = "",
+    var orderProductTotalPrice: String = "",
+    var orderProductSize: String = "",
     var orderDate : String = formatDate,
     var orderShipping : String = "",
+    var orderUserName : String = "",
+    var orderUserPhone : String = "",
     var orderPaymentId : String = "",
     var orderStatus : String = "",
 )

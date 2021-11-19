@@ -1,74 +1,58 @@
 package my.com.fashionapp
 
-import android.content.SharedPreferences
+import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.ActivityMainBinding
+import my.com.fashionappstaff.data.emailAdress
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val vm: UserViewModel by viewModels()
+    private lateinit var abc: AppBarConfiguration
     private val nav by lazy { supportFragmentManager.findFragmentById(R.id.host)!!.findNavController() }
 
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val preferences = getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
 
-        val preferences1 = getSharedPreferences("checkBo", MODE_PRIVATE)
-        val checkbox = preferences1?.getString("remember","")
-
-        if (checkbox == "true") {
-            val preferences = getSharedPreferences("email", MODE_PRIVATE)
-            val emailLogin = preferences?.getString("emailLogin","")
-
-            if (emailLogin != null) {
-                navi(emailLogin)
-            }
-            vm.getAll()
-            nav.navigate(R.id.homeFragment)
-
-        }else {
-
-            val sharedPref = getSharedPreferences("checkBo", MODE_PRIVATE)
-            val editor : SharedPreferences.Editor = sharedPref!!.edit()
-            editor.putString("remember","false")
-            editor.apply()
-            val sharedPref1 = getSharedPreferences("email", MODE_PRIVATE)
-            val editor1 : SharedPreferences.Editor = sharedPref1!!.edit()
-            editor1.putString("emailLogin","")
-            editor1.apply()
-            val email = ""
-
-            navi(email)
-
-            binding.bottomNavigation.selectedItemId = R.id.home
+        if (emailLogin != null) {
+            navi(emailLogin)
         }
+
     }
 
+
     fun navi(email: String) {
+
         binding.bottomNavigation.setOnItemSelectedListener {
             if(email == ""){
                 when (it.itemId) {
                     R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
                     R.id.nav_shop -> nav.navigate(R.id.action_global_categoryFragment)
                     R.id.nav_profile -> nav.navigate(R.id.action_global_profileFragment2)
+                    R.id.nav_cart -> nav.navigate(R.id.emptyCartFragment)
                 }
             } else {
                 when (it.itemId) {
                     R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
                     R.id.nav_shop -> nav.navigate(R.id.action_global_categoryFragment)
                     R.id.nav_profile -> nav.navigate(R.id.action_global_loginProfileFragment)
+                    R.id.nav_cart -> nav.navigate(R.id.cartFragment)
                 }
             }
             true
         }
+
     }
 
     override fun onBackPressed() {
@@ -80,6 +64,8 @@ class MainActivity : AppCompatActivity() {
             "fragment_category"      -> super.finish()
             "fragment_profile"       -> super.finish()
             "fragment_login_profile" -> super.finish()
+            "fragment_cart"          -> super.finish()
+            "fragment_empty_cart"    -> super.finish()
         }
         nav.popBackStack()
     }

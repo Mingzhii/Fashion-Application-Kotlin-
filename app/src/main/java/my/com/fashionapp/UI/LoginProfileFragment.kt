@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Blob
 import my.com.fashionapp.MainActivity
 import my.com.fashionapp.R
-import my.com.fashionapp.data.CartViewModel
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentLoginProfileBinding
 import my.com.fashionapp.util.toBitmap
@@ -29,7 +28,6 @@ class LoginProfileFragment : Fragment() {
     private lateinit var binding: FragmentLoginProfileBinding
     private val nav by lazy{ findNavController() }
     private val vm: UserViewModel by activityViewModels()
-    private val vmC: CartViewModel by activityViewModels()
     private val email by lazy { requireArguments().getString("email", "N/A") }
     private val id by lazy { requireArguments().getString("id", "N/A")}
 
@@ -37,7 +35,6 @@ class LoginProfileFragment : Fragment() {
 
         binding = FragmentLoginProfileBinding.inflate(inflater, container, false)
         vm.getAll()
-        vmC.getAll()
         val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 
@@ -46,7 +43,6 @@ class LoginProfileFragment : Fragment() {
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
 
-
         // Sign Out Method haven't test yer
         binding.conLayLogout.setOnClickListener { logout() }
         binding.conLayCart.setOnClickListener { nav.navigate(R.id.cartFragment) }
@@ -54,6 +50,7 @@ class LoginProfileFragment : Fragment() {
         binding.conLayHistory.setOnClickListener { nav.navigate(R.id.paymentHistoryFragment) }
         binding.conLayProfile.setOnClickListener { nav.navigate(R.id.updateUserProfileFragment) }
         binding.conLayResetPass.setOnClickListener { nav.navigate(R.id.resetPasswordFragment, bundleOf("email" to emailLogin)) }
+        binding.conLayDelivery.setOnClickListener {nav.navigate(R.id.deliveryFragment)}
 
         // Navigation
 

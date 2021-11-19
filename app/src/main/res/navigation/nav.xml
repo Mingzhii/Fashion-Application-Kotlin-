@@ -202,4 +202,56 @@
         android:name="my.com.fashionapp.RazorActivity"
         android:label="activity_razor"
         tools:layout="@layout/activity_razor" />
+    <dialog
+        android:id="@+id/emptyCartFragment"
+        android:name="my.com.fashionapp.UI.EmptyCartFragment"
+        android:label="fragment_empty_cart"
+        tools:layout="@layout/fragment_empty_cart" >
+        <action
+            android:id="@+id/action_emptyCartFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/emptyCartLogin"
+        android:name="my.com.fashionapp.UI.EmptyCartLogin"
+        android:label="fragment_empty_cart_login"
+        tools:layout="@layout/fragment_empty_cart_login" />
+    <fragment
+        android:id="@+id/deliveryFragment"
+        android:name="my.com.fashionapp.UI.DeliveryFragment"
+        android:label="fragment_delivery"
+        tools:layout="@layout/fragment_delivery" >
+        <action
+            android:id="@+id/action_deliveryFragment_to_loginProfileFragment"
+            app:destination="@id/loginProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryCompletedFragment"
+        android:name="my.com.fashionapp.UI.DeliveryCompletedFragment"
+        android:label="DeliveryCompletedFragment" />
+    <fragment
+        android:id="@+id/deliveryDeliveredFragment"
+        android:name="my.com.fashionapp.UI.DeliveryDeliveredFragment"
+        android:label="DeliveryDeliveredFragment" />
+    <fragment
+        android:id="@+id/deliveryDeliveringFragment"
+        android:name="my.com.fashionapp.UI.DeliveryDeliveringFragment"
+        android:label="DeliveryDeliveringFragment" />
+    <fragment
+        android:id="@+id/deliveryToShipFragment"
+        android:name="my.com.fashionapp.UI.DeliveryToShipFragment"
+        android:label="DeliveryToShipFragment" />
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="my.com.fashionapp.UI.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <action
+            android:id="@+id/action_orderDetailFragment_to_deliveryFragment"
+            app:destination="@id/deliveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryProductDetailFragment"
+        android:name="my.com.fashionapp.UI.DeliveryProductDetailFragment"
+        android:label="DeliveryProductDetailFragment" />
 </navigation>
