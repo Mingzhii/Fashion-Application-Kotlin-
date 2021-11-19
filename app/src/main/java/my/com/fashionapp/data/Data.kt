@@ -115,10 +115,13 @@ data class Order (
 data class Voucher (
     @DocumentId
     var voucherId : String = "",
+    var voucherImg : Blob = Blob.fromBytes(ByteArray(0)),
+    var voucherName : String = "",
     var voucherDescription : String = "",
     var voucherQuantity : Int = 0,
-    var voucherExpiryDate : String = formatDate,
-    var voucherValue : Int = 0,
+    var voucherDate : String = formatDate,
+    var voucherExpiryDate : String = "",
+    var voucherValue : Double = 0.0,
 )
 
 data class VoucherClaim (

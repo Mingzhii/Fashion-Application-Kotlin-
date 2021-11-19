@@ -47,6 +47,7 @@ class LoginProfileFragment : Fragment() {
         binding.conLayLogout.setOnClickListener { logout() }
         binding.conLayCart.setOnClickListener { nav.navigate(R.id.cartFragment) }
         binding.conLayReward.setOnClickListener { nav.navigate(R.id.rewardFragment) }
+        binding.conLayVoucher.setOnClickListener { nav.navigate(R.id.voucherFragment) }
         binding.conLayHistory.setOnClickListener { nav.navigate(R.id.paymentHistoryFragment) }
         binding.conLayProfile.setOnClickListener { nav.navigate(R.id.updateUserProfileFragment) }
         binding.conLayResetPass.setOnClickListener { nav.navigate(R.id.resetPasswordFragment, bundleOf("email" to emailLogin)) }

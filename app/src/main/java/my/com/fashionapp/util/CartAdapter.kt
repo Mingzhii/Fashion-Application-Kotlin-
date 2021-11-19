@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import my.com.fashionapp.R
 import my.com.fashionappstaff.data.Cart
-import my.com.fashionappstaff.data.Product
-import my.com.fashionappstaff.data.totalPrice
-import org.w3c.dom.Text
 
 class CartAdapter (val fn: (ViewHolder, Cart) -> Unit = { _, _ -> })
     :  ListAdapter<Cart, CartAdapter.ViewHolder>(DiffCallback) {
@@ -42,7 +39,6 @@ class CartAdapter (val fn: (ViewHolder, Cart) -> Unit = { _, _ -> })
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cart = getItem(position)
-
 //        holder.txtId.text   = friend.id
 
         holder.imgPhoto.setImageBitmap(cart.cartProductPhoto.toBitmap())
