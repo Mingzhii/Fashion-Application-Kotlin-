@@ -54,6 +54,7 @@ class DeliveryDeliveringFragment : Fragment() {
         adapter = DeliveryAdapter() { holder, product ->
 
             val p = vm.get(product.orderProduct)
+            val o = vmO.get(product.orderId)
 
             if (p != null) {
                 holder.imgPhoto.setImageBitmap(p.productPhoto.toBitmap())
@@ -61,7 +62,9 @@ class DeliveryDeliveringFragment : Fragment() {
             }
 
             holder.root.setOnClickListener {
-                nav.navigate(R.id.productDetailFragment, bundleOf("id" to product.orderProduct))
+                if (o != null && p != null) {
+                    nav.navigate(R.id.orderDetailFragment, bundleOf("id" to product.orderId, "id1" to product.orderProduct,"id2" to product.orderPaymentId ))
+                }
             }
         }
 
@@ -69,7 +72,10 @@ class DeliveryDeliveringFragment : Fragment() {
         binding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         vmO.getAll().observe(viewLifecycleOwner){list ->
-            adapter.submitList(list)
+            var orderArray = list.filter { o ->
+                o.orderStatus == "Delivering"
+            }
+            adapter.submitList(orderArray)
         }
 
 

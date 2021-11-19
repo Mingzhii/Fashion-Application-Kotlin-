@@ -62,7 +62,6 @@ class DeliveryFragment : Fragment() {
             }
 
             holder.root.setOnClickListener {
-
                 if (o != null && p != null) {
                     nav.navigate(R.id.orderDetailFragment, bundleOf("id" to product.orderId, "id1" to product.orderProduct,"id2" to product.orderPaymentId ))
                 }
@@ -73,9 +72,11 @@ class DeliveryFragment : Fragment() {
         binding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         vmO.getAll().observe(viewLifecycleOwner){list ->
-            adapter.submitList(list)
+            var orderArray = list.filter { o ->
+                o.orderStatus == "Paid"
+            }
+            adapter.submitList(orderArray)
         }
-
 
         binding.bottomNavigationDelivery.setOnItemSelectedListener {
             when(it.itemId){

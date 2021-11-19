@@ -71,6 +71,7 @@ class OrderDetailFragment : Fragment() {
             binding.txtOrderDetailsQuant.setText("X" + o.orderProductQuantity)
             binding.txtRecipientName.setText(o.orderUserName)
             binding.txtPhoneNo.setText(o.orderUserPhone)
+            binding.txtOrderDetailStatus.setText(o.orderStatus)
         }
         if(p != null){
             binding.txtOrderDetailsName.setText(p.productName)
