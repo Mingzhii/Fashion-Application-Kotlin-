@@ -3,6 +3,7 @@ package my.com.fashionapp
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,15 +23,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val preferences = getSharedPreferences("email", Context.MODE_PRIVATE)
+        val preferences = getSharedPreferences("email", MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 
         if (emailLogin != null) {
             navi(emailLogin)
         }
 
-    }
+        binding.bottomNavigationDelivery.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.nav_paid -> nav.navigate(R.id.deliveryFragment)
+                R.id.nav_ship-> nav.navigate(R.id.deliveryToShipFragment)
+                R.id.nav_delivering -> nav.navigate(R.id.deliveryDeliveringFragment)
+                R.id.nav_delivered -> nav.navigate(R.id.deliveryDeliveredFragment)
+                R.id.nav_completed -> nav.navigate(R.id.deliveryCompletedFragment)
+            }
+            true
+        }
+        binding.bottomNavigationDelivery.visibility = View.GONE
 
+    }
 
     fun navi(email: String) {
 

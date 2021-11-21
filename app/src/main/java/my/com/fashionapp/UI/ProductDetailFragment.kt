@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,10 +43,17 @@ class ProductDetailFragment : Fragment() {
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
-
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         // TODO
         detail()
+        val p = vm.get(id)
+        binding.imgProductDetail.setOnClickListener {
+            if (p != null) {
+                nav.navigate(R.id.productPhotoFragment, bundleOf("id" to p.productId))
+            }
+        }
         binding.imgProductDetailBack.setOnClickListener { nav.navigateUp() }
         binding.btnAddToCart.setOnClickListener { addToCart() }
         binding.btnSizeXS.setOnClickListener {
@@ -154,15 +162,18 @@ class ProductDetailFragment : Fragment() {
     private fun detail() {
 
         val p = vm.get(id)
-        if (p == null){
+        if (p != null){
+            val int = p.productQuan
+            binding.imgProductDetail.setImageBitmap(p.productPhoto.toBitmap())
+            binding.txtProductDetailName.setText(p.productName)
+            binding.txtProductDetailPrice.setText("RM %.2f".format(p.productPrice))
+            binding.txtProductDetailDescription.setText(p.productDescrip)
+            binding.txtProductQuantity.setText(String.format("%d",int))
+        }else{
             nav.navigateUp()
-            return
         }
 
-        binding.imgProductDetail.setImageBitmap(p.productPhoto.toBitmap())
-        binding.txtProductDetailName.setText(p.productName)
-        binding.txtProductDetailPrice.setText("RM %.2f".format(p.productPrice))
-        binding.txtProductDetailDescription.setText(p.productDescrip)
+
 
     }
 

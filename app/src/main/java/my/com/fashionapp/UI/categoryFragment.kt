@@ -26,7 +26,8 @@ class categoryFragment : Fragment() {
         // TODO
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
-
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         binding.relativeMen.setOnClickListener { nav.navigate(R.id.categoryDetailFragment, bundleOf("category" to "Men")) }
 

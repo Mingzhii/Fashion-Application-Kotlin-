@@ -222,25 +222,29 @@
         android:label="fragment_delivery"
         tools:layout="@layout/fragment_delivery" >
         <action
-            android:id="@+id/action_deliveryFragment_to_loginProfileFragment"
+            android:id="@+id/deliveryFragment_to_loginProfileFragment"
             app:destination="@id/loginProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/deliveryCompletedFragment"
         android:name="my.com.fashionapp.UI.DeliveryCompletedFragment"
-        android:label="DeliveryCompletedFragment" />
+        android:label="DeliveryCompletedFragment" >
+    </fragment>
     <fragment
         android:id="@+id/deliveryDeliveredFragment"
         android:name="my.com.fashionapp.UI.DeliveryDeliveredFragment"
-        android:label="DeliveryDeliveredFragment" />
+        android:label="DeliveryDeliveredFragment" >
+    </fragment>
     <fragment
         android:id="@+id/deliveryDeliveringFragment"
         android:name="my.com.fashionapp.UI.DeliveryDeliveringFragment"
-        android:label="DeliveryDeliveringFragment" />
+        android:label="DeliveryDeliveringFragment" >
+    </fragment>
     <fragment
         android:id="@+id/deliveryToShipFragment"
         android:name="my.com.fashionapp.UI.DeliveryToShipFragment"
-        android:label="DeliveryToShipFragment" />
+        android:label="DeliveryToShipFragment" >
+    </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="my.com.fashionapp.UI.OrderDetailFragment"
@@ -259,4 +263,14 @@
         android:name="my.com.fashionapp.UI.VoucherFragment"
         android:label="fragment_voucher"
         tools:layout="@layout/fragment_voucher" />
+    <fragment
+        android:id="@+id/updateToCompletedDeliveryFragment"
+        android:name="my.com.fashionapp.UI.UpdateToCompletedDeliveryFragment"
+        android:label="fragment_update_to_completed_delivery"
+        tools:layout="@layout/fragment_update_to_completed_delivery" />
+    <dialog
+        android:id="@+id/productPhotoFragment"
+        android:name="my.com.fashionapp.UI.ProductPhotoFragment"
+        android:label="fragment_product_photo"
+        tools:layout="@layout/fragment_product_photo" />
 </navigation>

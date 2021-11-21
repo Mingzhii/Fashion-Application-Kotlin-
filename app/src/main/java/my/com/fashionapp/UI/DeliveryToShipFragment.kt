@@ -40,6 +40,8 @@ class DeliveryToShipFragment : Fragment() {
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.VISIBLE
 
         binding.edtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(name: String) = true
@@ -49,7 +51,7 @@ class DeliveryToShipFragment : Fragment() {
             }
         })
 
-        binding.imgDeliveryBack.setOnClickListener { nav.navigate(R.id.action_deliveryFragment_to_loginProfileFragment) }
+        binding.imgDeliveryBack.setOnClickListener { nav.navigate(R.id.deliveryFragment) }
 
         adapter = DeliveryAdapter() { holder, product ->
 
@@ -77,21 +79,6 @@ class DeliveryToShipFragment : Fragment() {
             }
             adapter.submitList(orderArray)
         }
-
-
-        binding.bottomNavigationDelivery.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_paid -> nav.navigate(R.id.deliveryFragment)
-                R.id.nav_ship-> nav.navigate(R.id.deliveryToShipFragment)
-                R.id.nav_delivering -> nav.navigate(R.id.deliveryDeliveringFragment)
-                R.id.nav_delivered -> nav.navigate(R.id.deliveryDeliveredFragment)
-                R.id.nav_completed -> nav.navigate(R.id.deliveryCompletedFragment)
-            }
-            true
-        }
-
         return binding.root
     }
-
-
 }

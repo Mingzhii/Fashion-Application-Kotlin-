@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_home.*
 import my.com.fashionapp.R
 import my.com.fashionapp.data.CartViewModel
 import my.com.fashionapp.data.ProductViewModel
@@ -39,6 +40,8 @@ class HomeFragment : Fragment() {
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         vm.search("")
         binding.edtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -48,6 +51,7 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
+
 
         adapter = ProductAdapter() { holder, product ->
             // Item click

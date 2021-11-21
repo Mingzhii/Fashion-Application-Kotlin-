@@ -40,6 +40,8 @@ class DeliveryDeliveredFragment: Fragment() {
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.VISIBLE
 
         binding.edtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(name: String) = true
@@ -49,7 +51,7 @@ class DeliveryDeliveredFragment: Fragment() {
             }
         })
 
-        binding.imgDeliveryBack.setOnClickListener { nav.navigate(R.id.action_deliveryFragment_to_loginProfileFragment) }
+        binding.imgDeliveryBack.setOnClickListener { nav.navigate(R.id.deliveryFragment) }
 
         adapter = DeliveryAdapter() { holder, product ->
 
@@ -63,7 +65,7 @@ class DeliveryDeliveredFragment: Fragment() {
 
             holder.root.setOnClickListener {
                 if (o != null && p != null) {
-                    nav.navigate(R.id.orderDetailFragment, bundleOf("id" to product.orderId, "id1" to product.orderProduct,"id2" to product.orderPaymentId ))
+                    nav.navigate(R.id.updateToCompletedDeliveryFragment, bundleOf("id" to product.orderId, "id1" to product.orderProduct,"id2" to product.orderPaymentId ))
                 }
             }
         }
@@ -76,17 +78,6 @@ class DeliveryDeliveredFragment: Fragment() {
                 o.orderStatus == "Delivered"
             }
             adapter.submitList(orderArray)
-        }
-
-        binding.bottomNavigationDelivery.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_paid -> nav.navigate(R.id.deliveryFragment)
-                R.id.nav_ship-> nav.navigate(R.id.deliveryToShipFragment)
-                R.id.nav_delivering -> nav.navigate(R.id.deliveryDeliveringFragment)
-                R.id.nav_delivered -> nav.navigate(R.id.deliveryDeliveredFragment)
-                R.id.nav_completed -> nav.navigate(R.id.deliveryCompletedFragment)
-            }
-            true
         }
 
         return binding.root

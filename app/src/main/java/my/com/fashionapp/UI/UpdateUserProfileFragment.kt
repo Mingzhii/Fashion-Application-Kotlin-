@@ -43,6 +43,8 @@ class UpdateUserProfileFragment : Fragment() {
         // TODO
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")

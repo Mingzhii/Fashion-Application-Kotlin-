@@ -33,7 +33,9 @@ class CategoryDetailFragment : Fragment() {
 
         // TODO
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
-        btn.visibility = View.GONE
+        btn.visibility = View.VISIBLE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         binding.imgBack.setOnClickListener { nav.navigate(R.id.action_categoryDetailFragment_to_categoryFragment2) }
 

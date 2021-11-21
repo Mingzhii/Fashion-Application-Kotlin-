@@ -17,12 +17,14 @@ import my.com.fashionapp.data.PaymentViewModel
 import my.com.fashionapp.data.ProductViewModel
 import my.com.fashionapp.data.UserViewModel
 import my.com.fashionapp.databinding.FragmentOrderDetailBinding
+import my.com.fashionapp.databinding.FragmentUpdateToCompletedDeliveryBinding
 import my.com.fashionapp.util.toBitmap
+import my.com.fashionappstaff.data.Order
 
 
-class OrderDetailFragment : Fragment() {
+class UpdateToCompletedDeliveryFragment : Fragment() {
 
-    private lateinit var binding: FragmentOrderDetailBinding
+    private lateinit var binding: FragmentUpdateToCompletedDeliveryBinding
     private val vmU : UserViewModel by activityViewModels()
     private val vm: ProductViewModel by activityViewModels()
     private val vmO: OrderViewModel by activityViewModels()
@@ -36,16 +38,17 @@ class OrderDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        binding = FragmentUpdateToCompletedDeliveryBinding.inflate(inflater, container, false)
 
-        binding = FragmentOrderDetailBinding.inflate(inflater, container, false)
-
-        val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
-        btn.visibility = View.GONE
+//        val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+//        btn.visibility = View.GONE
         val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
         btn1.visibility = View.GONE
 
         orderDetail()
-        binding.imgOrderDetailsBack.setOnClickListener { nav.navigate(R.id.action_orderDetailFragment_to_deliveryFragment) }
+        binding.imgOrderDetailsBack.setOnClickListener { nav.navigate(R.id.deliveryFragment) }
+
+        binding.btnOrderReceived.setOnClickListener { updateOrder() }
 
         val p1 = vm.get(id1)
 
@@ -58,6 +61,30 @@ class OrderDetailFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun updateOrder() {
+        val order = vmO.get(id)
+
+        val o = order?.let {
+            Order(
+                orderId = id,
+                orderPaymentId = id2,
+                orderProduct = id1,
+                orderProductQuantity = it.orderProductQuantity,
+                orderProductTotalPrice = it.orderProductTotalPrice,
+                orderShipping = it.orderShipping,
+                orderUserName = it.orderUserName,
+                orderUserPhone = it.orderUserPhone,
+                orderStatus = "Completed"
+            )
+        }
+        if (o != null) {
+            vmO.set(o)
+        }else{
+            snackbar("Update Fail")
+        }
+        nav.navigate(R.id.deliveryFragment)
     }
 
     private fun orderDetail() {

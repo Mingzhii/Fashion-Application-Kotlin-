@@ -42,6 +42,8 @@ class LoginProfileFragment : Fragment() {
         getImage(emailLogin)
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         // Sign Out Method haven't test yer
         binding.conLayLogout.setOnClickListener { logout() }

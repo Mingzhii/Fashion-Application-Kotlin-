@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import my.com.fashionapp.R
 import my.com.fashionappstaff.data.Product
+import org.w3c.dom.Text
 
 class ProductAdapter (val fn: (ViewHolder, Product) -> Unit = { _, _ -> })
     :  ListAdapter<Product, ProductAdapter.ViewHolder>(DiffCallback) {
@@ -25,6 +26,7 @@ class ProductAdapter (val fn: (ViewHolder, Product) -> Unit = { _, _ -> })
         val imgPhoto     : ImageView = view.findViewById(R.id.imgProduct)
         val txtName      : TextView = view.findViewById(R.id.txtProductName)
         val txtPrice     : TextView = view.findViewById(R.id.txtProductPrice)
+//        val txtQuantity  : TextView = view.findViewById(R.id.txtQuantity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,6 +42,7 @@ class ProductAdapter (val fn: (ViewHolder, Product) -> Unit = { _, _ -> })
 //        holder.txtId.text   = friend.id
         holder.txtName.text = product.productName
         holder.txtPrice.text  = "RM %.2f".format(product.productPrice)
+//        holder.txtQuantity.text = product.productQuan.toString()
 
         // TODO: Photo (blob to bitmap)a
         holder.imgPhoto.setImageBitmap(product.productPhoto.toBitmap())

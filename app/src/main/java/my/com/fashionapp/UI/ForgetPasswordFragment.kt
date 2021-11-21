@@ -42,6 +42,8 @@ class ForgetPasswordFragment : Fragment() {
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.GONE
 
         val n  = (0..999999).random()
         val fmt = DecimalFormat("000000")

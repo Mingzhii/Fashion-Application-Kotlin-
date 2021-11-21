@@ -26,6 +26,7 @@ class DeliveryAdapter (val fn: (ViewHolder, Order) -> Unit = { _, _ -> })
         val txtPrice      : TextView = view.findViewById(R.id.txtOrderProductPrice)
         val txtQuantity   : TextView = view.findViewById(R.id.txtOrderProductQuantity)
         val txtStatus     : TextView = view.findViewById(R.id.txtOrderStatus)
+//        val txtPaymentMethod : TextView = view.findViewById(R.id.txtOrderPaymentMethod)
 
     }
 

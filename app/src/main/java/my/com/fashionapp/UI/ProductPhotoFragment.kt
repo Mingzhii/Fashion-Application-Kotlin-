@@ -1,5 +1,6 @@
 package my.com.fashionapp.UI
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -7,7 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,8 +16,7 @@ import my.com.fashionapp.R
 import my.com.fashionapp.data.CartViewModel
 import my.com.fashionapp.data.ProductViewModel
 import my.com.fashionapp.data.UserViewModel
-import my.com.fashionapp.databinding.FragmentDeliveryProductDetailBinding
-import my.com.fashionapp.databinding.FragmentProductDetailBinding
+import my.com.fashionapp.databinding.FragmentProductPhotoBinding
 import my.com.fashionapp.util.cropToBlob
 import my.com.fashionapp.util.errorDialog
 import my.com.fashionapp.util.informationDialog
@@ -25,9 +25,9 @@ import my.com.fashionappstaff.data.Cart
 import my.com.fashionappstaff.data.username
 
 
-class DeliveryProductDetailFragment : Fragment() {
+class ProductPhotoFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentDeliveryProductDetailBinding
+    private lateinit var binding: FragmentProductPhotoBinding
     private val nav by lazy{ findNavController() }
     private val vm : ProductViewModel by activityViewModels()
     private val vmC: CartViewModel by activityViewModels()
@@ -38,22 +38,14 @@ class DeliveryProductDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        binding = FragmentDeliveryProductDetailBinding.inflate(inflater, container, false)
-
+        binding = FragmentProductPhotoBinding.inflate(inflater, container, false)
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
         val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
         btn1.visibility = View.GONE
 
-        // TODO
         detail()
-        binding.imgProductDetailBack.setOnClickListener { nav.navigateUp() }
-        val p = vm.get(id)
-        binding.imgProductDetail.setOnClickListener {
-            if (p != null) {
-                nav.navigate(R.id.productPhotoFragment, bundleOf("id" to p.productId))
-            }
-        }
+//        binding.imgProductDetailBack.setOnClickListener { nav.navigateUp() }
         return binding.root
     }
 
@@ -65,10 +57,6 @@ class DeliveryProductDetailFragment : Fragment() {
             return
         }
         binding.imgProductDetail.setImageBitmap(p.productPhoto.toBitmap())
-        binding.txtProductDetailName.setText(p.productName)
-        binding.txtProductDetailPrice.setText("RM %.2f".format(p.productPrice))
-        binding.txtProductDetailDescription.setText(p.productDescrip)
-
     }
 
 

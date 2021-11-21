@@ -12,10 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
-import my.com.fashionapp.data.CartViewModel
-import my.com.fashionapp.data.OrderViewModel
-import my.com.fashionapp.data.ProductViewModel
-import my.com.fashionapp.data.UserViewModel
+import my.com.fashionapp.data.*
 import my.com.fashionapp.databinding.FragmentDeliveryBinding
 import my.com.fashionapp.util.DeliveryAdapter
 import my.com.fashionapp.util.toBitmap
@@ -28,6 +25,7 @@ class DeliveryFragment : Fragment() {
     private val vm: ProductViewModel by activityViewModels()
     private val vmC: CartViewModel by activityViewModels()
     private val vmO: OrderViewModel by activityViewModels()
+    private val vmP: PaymentViewModel by activityViewModels()
 
     private lateinit var adapter: DeliveryAdapter
 
@@ -40,6 +38,9 @@ class DeliveryFragment : Fragment() {
 
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.GONE
+        val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
+        btn1.visibility = View.VISIBLE
+
 
         binding.edtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(name: String) = true
@@ -49,12 +50,13 @@ class DeliveryFragment : Fragment() {
             }
         })
 
-        binding.imgDeliveryBack.setOnClickListener { nav.navigate(R.id.action_deliveryFragment_to_loginProfileFragment) }
+        binding.imgDeliveryBack.setOnClickListener { nav.navigate(R.id.deliveryFragment_to_loginProfileFragment) }
 
         adapter = DeliveryAdapter() { holder, product ->
 
             val p = vm.get(product.orderProduct)
             val o = vmO.get(product.orderId)
+            val pay = vmP.get(product.orderPaymentId)
 
             if (p != null) {
                 holder.imgPhoto.setImageBitmap(p.productPhoto.toBitmap())
@@ -63,7 +65,7 @@ class DeliveryFragment : Fragment() {
 
             holder.root.setOnClickListener {
                 if (o != null && p != null) {
-                    nav.navigate(R.id.orderDetailFragment, bundleOf("id" to product.orderId, "id1" to product.orderProduct,"id2" to product.orderPaymentId ))
+                    nav.navigate(R.id.orderDetailFragment, bundleOf("id" to product.orderId, "id1" to product.orderProduct,"id2" to product.orderPaymentId))
                 }
             }
         }
@@ -76,17 +78,6 @@ class DeliveryFragment : Fragment() {
                 o.orderStatus == "Paid"
             }
             adapter.submitList(orderArray)
-        }
-
-        binding.bottomNavigationDelivery.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_paid -> nav.navigate(R.id.deliveryFragment)
-                R.id.nav_ship-> nav.navigate(R.id.deliveryToShipFragment)
-                R.id.nav_delivering -> nav.navigate(R.id.deliveryDeliveringFragment)
-                R.id.nav_delivered -> nav.navigate(R.id.deliveryDeliveredFragment)
-                R.id.nav_completed -> nav.navigate(R.id.deliveryCompletedFragment)
-            }
-            true
         }
 
         return binding.root
