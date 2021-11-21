@@ -3,15 +3,19 @@ package my.com.fashionapp.UI
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.fashionapp.R
+import my.com.fashionapp.RazorActivity
 import my.com.fashionapp.data.CartViewModel
 import my.com.fashionapp.data.ProductViewModel
 import my.com.fashionapp.data.UserViewModel
@@ -34,6 +38,7 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(inflater, container, false)
         vm.getAll()
+        vmU.getAll()
         vmP.getAll()
         // TODO
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
@@ -159,6 +164,10 @@ class CartFragment : Fragment() {
                 c.cartUsername == u?.userName && c.cartStatus != "Done The Payment"
             }
 
+            if(cartArray.isEmpty()){
+                nav.navigate(R.id.emptyCartLogin)
+            }
+
             val caltotal = cartArray.filter { c ->
                 c.cartCheck == "Checked"
             }
@@ -203,14 +212,13 @@ class CartFragment : Fragment() {
             adapter.submitList(cartArray)
         }
 
-        binding.btnCheckOut.setOnClickListener { checkout(arrayPress) }
-
-        vm.getAll().observe(viewLifecycleOwner) { list ->
-            adapter.submitList(list)
-
-            if(list.isEmpty()){
-                nav.navigate(R.id.emptyCartLogin)
+        binding.btnCheckOut.setOnClickListener {
+            if(arrayPress.size != 0 ){
+                checkout(arrayPress)
+            } else {
+                Toast.makeText(context,"Please Select the product you want to process to payment", Toast.LENGTH_LONG).show()
             }
+
         }
 
         return binding.root
@@ -218,11 +226,23 @@ class CartFragment : Fragment() {
 
     private fun checkout(product: ArrayList<OrderList>) {
 
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLogin = preferences?.getString("emailLogin","")
+
+        val u = emailLogin?.let { vmU.getEmail(it) }
+
+        if (u != null) {
+            username = u.userName
+            homeaddress = u.homeAddress
+            phonenumber = u.phoneNumber
+        }
+
         checkOutArray = product
 
         totalPrice = binding.txtCartTotalPrice.text.toString().toDouble()
 
-        nav.navigate(R.id.razorActivity)
+        nav.navigate(R.id.razorPayFragment, bundleOf("vID" to ""))
+//        nav.navigate(R.id.razorActivity)
     }
 
     fun Fragment.deleteDialog(text: String, cartID: String) {

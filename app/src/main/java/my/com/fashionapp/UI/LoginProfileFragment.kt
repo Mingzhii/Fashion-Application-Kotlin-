@@ -35,17 +35,17 @@ class LoginProfileFragment : Fragment() {
 
         binding = FragmentLoginProfileBinding.inflate(inflater, container, false)
         vm.getAll()
+
         val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
         val emailLogin = preferences?.getString("emailLogin","")
 
-        // TODO
         getImage(emailLogin)
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
         val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)
         btn1.visibility = View.GONE
 
-        // Sign Out Method haven't test yer
+
         binding.conLayLogout.setOnClickListener { logout() }
         binding.conLayCart.setOnClickListener { nav.navigate(R.id.cartFragment) }
         binding.conLayReward.setOnClickListener { nav.navigate(R.id.rewardFragment) }

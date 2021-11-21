@@ -262,7 +262,69 @@
         android:id="@+id/voucherFragment"
         android:name="my.com.fashionapp.UI.VoucherFragment"
         android:label="fragment_voucher"
-        tools:layout="@layout/fragment_voucher" />
+        tools:layout="@layout/fragment_voucher" >
+        <action
+            android:id="@+id/action_voucherFragment_to_loginProfileFragment"
+            app:destination="@id/loginProfileFragment"
+            app:popUpTo="@id/voucherFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/termNConditionFragment"
+        android:name="my.com.fashionapp.UI.TermNConditionFragment"
+        android:label="fragment_term_n_condition"
+        tools:layout="@layout/fragment_term_n_condition" >
+        <action
+            android:id="@+id/action_termNConditionFragment_to_voucherFragment2"
+            app:destination="@id/voucherFragment"
+            app:popUpTo="@id/termNConditionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/listVoucherFragment"
+        android:name="my.com.fashionapp.UI.ListVoucherFragment"
+        android:label="fragment_list_voucher"
+        tools:layout="@layout/fragment_list_voucher" />
+    <fragment
+        android:id="@+id/voucherUsedFragment"
+        android:name="my.com.fashionapp.UI.VoucherUsedFragment"
+        android:label="fragment_voucher_used"
+        tools:layout="@layout/fragment_voucher_used" />
+    <fragment
+        android:id="@+id/voucherHistoryFragment"
+        android:name="my.com.fashionapp.UI.VoucherHistoryFragment"
+        android:label="fragment_voucher_history"
+        tools:layout="@layout/fragment_voucher_history" >
+        <action
+            android:id="@+id/action_voucherHistoryFragment_to_voucherFragment"
+            app:destination="@id/voucherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/voucherInvalidFragment"
+        android:name="my.com.fashionapp.UI.VoucherInvalidFragment"
+        android:label="fragment_voucher_invalid"
+        tools:layout="@layout/fragment_voucher_invalid" />
+    <fragment
+        android:id="@+id/voucherApplyFragment"
+        android:name="my.com.fashionapp.UI.VoucherApplyFragment"
+        android:label="fragment_voucher_apply"
+        tools:layout="@layout/fragment_voucher_apply" />
+    <fragment
+        android:id="@+id/voucherBagFragment"
+        android:name="my.com.fashionapp.UI.VoucherBagFragment"
+        android:label="fragment_voucher_bag"
+        tools:layout="@layout/fragment_voucher_bag" />
+    <fragment
+        android:id="@+id/razorPayFragment"
+        android:name="my.com.fashionapp.UI.RazorPayFragment"
+        android:label="fragment_razor_pay"
+        tools:layout="@layout/fragment_razor_pay" >
+        <action
+            android:id="@+id/action_razorPayFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:popUpTo="@id/razorPayFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/updateToCompletedDeliveryFragment"
         android:name="my.com.fashionapp.UI.UpdateToCompletedDeliveryFragment"

@@ -2,7 +2,6 @@ package my.com.fashionappstaff.data
 
 import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.DocumentId
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -10,9 +9,13 @@ import kotlin.collections.ArrayList
 
 var emailAdress : String = ""
 var username : String = ""
+var phonenumber : String = ""
+var homeaddress : String = ""
 var img : Blob = Blob.fromBytes(ByteArray(0))
 var checkOutArray : ArrayList<OrderList> = ArrayList<OrderList>()
 var totalPrice : Double = 0.0
+var vourID : String = ""
+var subtotalPrice : Double = 0.0
 
 data class Reward(
     @DocumentId
@@ -117,6 +120,7 @@ data class Voucher (
     var voucherId : String = "",
     var voucherImg : Blob = Blob.fromBytes(ByteArray(0)),
     var voucherName : String = "",
+    var voucherTerm : String = "",
     var voucherDescription : String = "",
     var voucherQuantity : Int = 0,
     var voucherDate : String = formatDate,
@@ -124,12 +128,15 @@ data class Voucher (
     var voucherValue : Double = 0.0,
 )
 
-data class VoucherClaim (
+data class VoucherClaim(
     @DocumentId
-    var voucherId : String = "",
-    var claimUser : String = "",
-    var voucherQuantity : Int = 0,
-    var voucherExpiryDate : String = formatDate,
-    var voucherValue : Int = 0,
-    var voucherStatus : String = "",
+    var voucherClaimID: String = "",
+    var voucherId: String = "",
+    var claimUser: String = "",
+    var voucherClaimImg: Blob = Blob.fromBytes(ByteArray(0)),
+    var voucherClaimName: String = "",
+    var voucherClaimQuantity: Int = 0,
+    var voucherClaimExpiryDate: String = formatDate,
+    var voucherValue: Double = 0.0,
+    var voucherStatus: String = "",
 )

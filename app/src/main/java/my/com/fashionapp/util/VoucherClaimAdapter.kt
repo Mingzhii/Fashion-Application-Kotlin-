@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import my.com.fashionapp.R
-import my.com.fashionappstaff.data.Voucher
+import my.com.fashionappstaff.data.VoucherClaim
 
-class VoucherAdapter (val fn: (VoucherAdapter.ViewHolder, Voucher) -> Unit = { _, _ -> })
-    :  ListAdapter<Voucher, VoucherAdapter.ViewHolder>(DiffCallback) {
+class VoucherClaimAdapter (val fn: (VoucherClaimAdapter.ViewHolder, VoucherClaim) -> Unit = { _, _ -> })
+    :  ListAdapter<VoucherClaim, VoucherClaimAdapter.ViewHolder>(DiffCallback) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Voucher>() {
-        override fun areItemsTheSame(a: Voucher, b: Voucher)    = a.voucherId == b.voucherId
-        override fun areContentsTheSame(a: Voucher, b: Voucher) = a.voucherId == b.voucherId
+    companion object DiffCallback : DiffUtil.ItemCallback<VoucherClaim>() {
+        override fun areItemsTheSame(a: VoucherClaim, b: VoucherClaim)    = a.voucherClaimID == b.voucherClaimID
+        override fun areContentsTheSame(a: VoucherClaim, b: VoucherClaim) = a.voucherClaimID == b.voucherClaimID
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,13 +40,13 @@ class VoucherAdapter (val fn: (VoucherAdapter.ViewHolder, Voucher) -> Unit = { _
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val voucher = getItem(position)
+        val voucherClaim = getItem(position)
 
-        holder.imgPhoto.setImageBitmap(voucher.voucherImg.toBitmap())
-        holder.txtName.text = voucher.voucherName
-        holder.txtExpiry.text = "Valid " + voucher.voucherExpiryDate
+        holder.imgPhoto.setImageBitmap(voucherClaim.voucherClaimImg.toBitmap())
+        holder.txtName.text = voucherClaim.voucherClaimName
+        holder.txtExpiry.text = "Valid " + voucherClaim.voucherClaimExpiryDate
 
         // TODO: Photo (blob to bitmap)a
-        fn(holder, voucher)
+        fn(holder, voucherClaim)
     }
 }

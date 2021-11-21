@@ -20,6 +20,7 @@ class EmptyCartLogin : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentEmptyCartLoginBinding.inflate(inflater, container, false)
+
         val btn : BottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
         btn.visibility = View.VISIBLE
         val btn1 : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationDelivery)

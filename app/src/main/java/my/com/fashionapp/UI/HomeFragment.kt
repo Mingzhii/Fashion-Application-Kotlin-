@@ -66,6 +66,7 @@ class HomeFragment : Fragment() {
 
         binding.rv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
+
         vm.getResult().observe(viewLifecycleOwner) { list ->
 
             val productArray = list.filter { p ->

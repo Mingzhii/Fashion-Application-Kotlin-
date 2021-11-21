@@ -3,38 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/activity_main.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_delivery.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_delivery_completed.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_delivery_delivered.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_delivery_delivering.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_delivery_product_detail.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_delivery_to_ship.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_empty_cart.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_empty_cart_login.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_login_profile.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_order_detail.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_product_detail.xml" value="0.340625" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_product_photo.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/fragment_update_to_completed_delivery.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/item_cart_product.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/layout/item_order.xml" value="0.3416666666666667" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/menu/item_delivery_status.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Lucas/AndroidStudioProjects/Fashion-Application-Kotlin-/app/src/main/res/menu/item_menu.xml" value="0.14814814814814814" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/categoryshape.xml" value="0.24444444444444444" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/circle.xml" value="0.24444444444444444" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/drawable/item_selector.xml" value="0.24444444444444444" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/activity_razor.xml" value="0.3729166666666667" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/activity_stripe.xml" value="0.25" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_cart.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_checkout_stripe.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_delivery.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_empty_cart.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_login_profile.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_order_history.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_payment_history.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_payment_method.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_payment_razorpay.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_product_detail.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_shop.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_sign_in.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/fragment_voucher.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_cart_product.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_history.xml" value="0.264" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_order.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_product.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/layout/item_voucher.xml" value="0.4" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/menu/item_delivery_status.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/menu/item_menu.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/menu/item_voucher.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/menu/menu_close.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/xiaoz/Desktop/FashionApp/app/src/main/res/xml/network_security_config.xml" value="0.27447916666666666" />
       </map>
     </option>
