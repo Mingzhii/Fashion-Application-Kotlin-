@@ -91,11 +91,12 @@ class RewardFragment : Fragment() {
                 if (result.contents == null) {
                     errorDialog("Result not found")
                 } else {
-                    nav.navigate(R.id.rewardDetailFragment, bundleOf("id" to result.contents))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                    nav.navigate(R.id.rewardDetailFragment, bundleOf("id" to "REW101"))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
             }
+            nav.navigate(R.id.rewardDetailFragment, bundleOf("id" to "REW101"))
         }
     }
 
