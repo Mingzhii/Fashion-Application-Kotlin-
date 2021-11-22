@@ -74,6 +74,7 @@ data class OrderList (
     var orderProductID : String = "",
     var orderCartID    : String = "",
     var orderProductQuantity : Int = 0,
+    var orderProductSize: String = "",
 )
 
 data class Payment (

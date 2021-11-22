@@ -10,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import com.sun.mail.iap.Argument
@@ -45,124 +47,10 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
         vmPro.getAll()
         vmVC.getAll()
 
-//        Checkout.preload(getApplicationContext())
-
-//        val preferences = this.getSharedPreferences("email", Context.MODE_PRIVATE)
-//        val emailLogin = preferences?.getString("emailLogin","")
-//
-//        adapter = PaymentProductAdapter() { holder, cart ->
-//
-//        }
-//
-//        binding.rv.adapter = adapter
-//
-//        binding.rv.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-//
-//        vmC.getAll().observe(this){ list->
-//            val paymentArray = list.filter { p ->
-//                p.cartCheck == "Checked"
-//            }
-//            adapter.submitList(paymentArray)
-//        }
-//
-//        binding.imgVoucherOpen.setOnClickListener {
-//            val intent = Intent(this, VoucherApplyFragment::class.java)
-//            startActivity(intent)
-//        }
-//
-//        binding.imgCheckOutBack.setOnClickListener {
-//            val intent = Intent(this, CartFragment::class.java)
-//            startActivity(intent)
-//        }
-//
-//        updateTotal()
-
-
-//        payButton.setOnClickListener {
-            makePayment()
-//        }
+        makePayment()
 
     }
 
-//    private fun updateTotal() {
-//
-//        binding.txtUsername.text = username
-//        binding.txtPhoneNumber.text = phonenumber
-//        binding.txtDeliveryAddress.text = homeaddress
-//
-//        val vid = intent.getStringExtra("vID")
-//        val vName = intent.getStringExtra("vName")
-//        val vValue = intent.getDoubleExtra("vValue", 0.0)
-//
-//
-//        if(vid == ""){
-//
-//            val shipping = 5.00
-//
-//            binding.txtMerSubtotal.text = "RM "+ "%.2f".format(totalPrice)
-//            binding.txtShipping.text =  "RM " + "%.2f".format(shipping)
-//
-//            val totalP = totalPrice + shipping
-//            val disc = 0.0
-//
-//            binding.txtDiscount2.text = "RM " + "%.2f".format(disc)
-//
-//            binding.txtTotalPayment.text = "RM " + "%.2f".format(totalP)
-//
-//            binding.txtTotalPrice.text = "RM " + "%.2f".format(totalP)
-//
-//            subtotalPrice = totalP
-//        } else {
-//
-//            if (vValue != 5.0){
-//
-//                val shipping = 5.00
-//
-//                binding.txtMerSubtotal.text = "RM "+ "%.2f".format(totalPrice)
-//                binding.txtShipping.text =  "RM " + "%.2f".format(shipping)
-//
-//                val totalP = totalPrice + shipping
-//                val disc = totalP * vValue
-//
-//                val totalAll = totalP - disc
-//
-//                binding.txtDiscount2.text = "-RM " + "%.2f".format(disc)
-//
-//                binding.txtTotalPayment.text = "RM " + "%.2f".format(totalAll)
-//
-//                binding.txtTotalPrice.text = "RM " + "%.2f".format(totalAll)
-//
-//                binding.txtVouchername.text = vName
-//
-//                subtotalPrice = totalAll
-//
-//            } else {
-//
-//                val shipping = 5.0
-//
-//                binding.txtMerSubtotal.text = "RM "+ "%.2f".format(totalPrice)
-//                binding.txtShipping.text =  "RM " + "%.2f".format(shipping)
-//
-//                val totalP = totalPrice + shipping
-//
-//                val disc = 5.0
-//
-//                val totalAll = totalP - disc
-//
-//                binding.txtDiscount2.text = "-RM " + "%.2f".format(disc)
-//
-//                binding.txtTotalPayment.text = "RM " + "%.2f".format(totalAll)
-//
-//                binding.txtTotalPrice.text = "RM " + "%.2f".format(totalAll)
-//
-//                binding.txtVouchername.text = vName
-//
-//                subtotalPrice = totalAll
-//            }
-//
-//        }
-//
-//    }
 
     private fun makePayment() {
         val co = Checkout()
@@ -303,40 +191,28 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
         )
         vmP.set(p)
 
-        var orderProduct = ""
-        var orderProductQuantity = ""
-
         for (i in 0 until checkOutArray.size) {
 
             val cartProductQuantity = checkOutArray[i].orderProductQuantity.toString()
             val cartProduct = checkOutArray[i].orderProductID
-            orderProduct += cartProduct + ","
-            orderProductQuantity += cartProductQuantity + ","
+            val cartProductSize = checkOutArray[i].orderProductSize
 
+            val o = Order(
+                orderProduct = cartProduct,
+                orderProductQuantity = cartProductQuantity,
+                orderProductTotalPrice = totalPrice.toString(),
+                orderProductSize = cartProductSize,
+                orderShipping = user.homeAddress,
+                orderUserName = user.userName,
+                orderUserPhone = user.phoneNumber,
+                orderPaymentId = payid,
+                orderStatus = "Paid",
+            )
+            Firebase.firestore
+                .collection("orders")
+                .document()
+                .set(o)
         }
-//        orderProduct
-//
-//        val divide = ","
-//
-//        val list = orderProduct.split(divide)
-//
-//        list.size
-
-        val orderid = vmO.validID()
-        val o = Order(
-            orderId = orderid,
-            orderProduct = orderProduct,
-            orderProductQuantity = orderProductQuantity,
-            orderProductTotalPrice = totalPrice.toString(),
-//            orderProductSize = cart.cartProductSize,
-            orderShipping = user.homeAddress,
-            orderUserName = user.userName,
-            orderUserPhone = user.phoneNumber,
-            orderPaymentId = payid,
-            orderStatus = "Paid",
-        )
-
-        vmO.set(o)
 
         val vc = vmVC.get(vourID)
 

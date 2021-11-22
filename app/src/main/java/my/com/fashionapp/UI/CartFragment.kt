@@ -189,6 +189,7 @@ class CartFragment : Fragment() {
                         orderProductID = caltotal[i].cartProductID,
                         orderCartID = caltotal[i].cartID,
                         orderProductQuantity = caltotal[i].cartProductQuantity,
+                        orderProductSize = caltotal[i].cartProductSize,
                     )
                     arrayPress.add(ol)
                     arrayPress.size
