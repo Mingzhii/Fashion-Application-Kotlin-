@@ -335,4 +335,9 @@
         android:name="my.com.fashionapp.UI.ProductPhotoFragment"
         android:label="fragment_product_photo"
         tools:layout="@layout/fragment_product_photo" />
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="my.com.fashionapp.UI.RatingFragment"
+        android:label="fragment_rating"
+        tools:layout="@layout/fragment_rating" />
 </navigation>

@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
                     R.id.nav_shop -> nav.navigate(R.id.action_global_categoryFragment)
+//                    R.id.nav_shop -> nav.navigate(R.id.ratingFragment)
                     R.id.nav_profile -> nav.navigate(R.id.action_global_profileFragment2)
                     R.id.nav_cart -> nav.navigate(R.id.emptyCartFragment)
                 }
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
                     R.id.nav_home -> nav.navigate(R.id.action_global_homeFragment)
                     R.id.nav_shop -> nav.navigate(R.id.action_global_categoryFragment)
+//                    R.id.nav_shop -> nav.navigate(R.id.ratingFragment)
                     R.id.nav_profile -> nav.navigate(R.id.action_global_loginProfileFragment)
                     R.id.nav_cart -> nav.navigate(R.id.cartFragment)
                 }
