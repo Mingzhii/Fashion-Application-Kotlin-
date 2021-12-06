@@ -21,6 +21,11 @@ class CartViewModel: ViewModel() {
         return carts.value?.find { c -> c.cartID == id }
     }
 
+    fun getProduct(id : String): Cart?{
+        return carts.value?.find { c -> c.cartProductID == id }
+    }
+
+
     fun getAll() = carts
 
     fun delete(id : String){

@@ -39,18 +39,12 @@ class CartAdapter (val fn: (ViewHolder, Cart) -> Unit = { _, _ -> })
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cart = getItem(position)
-//        holder.txtId.text   = friend.id
-
         holder.imgPhoto.setImageBitmap(cart.cartProductPhoto.toBitmap())
         holder.txtName.text = cart.cartProductName
         holder.txtQuantity.text = cart.cartProductQuantity.toString()
         holder.txtSize.text = cart.cartProductSize
         holder.txtPrice.text  = "%.2f".format(cart.cartTotalPrice)
         holder.chkBox.isChecked = cart.cartCheck == "Checked"
-
-
-
-        // TODO: Photo (blob to bitmap)a
         fn(holder, cart)
     }
 }

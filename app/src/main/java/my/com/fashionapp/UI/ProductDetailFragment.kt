@@ -121,27 +121,74 @@ class ProductDetailFragment : Fragment() {
             if (p?.productQuan != 0){
 
                 if (binding.txtSize.text != "" ){
-                    var chkID = vmC.validID()
-                    //ATC = Added To Cart
-                    //PTP = Process To Payment
-                    //DTP = Done The Payment
-                    val c = Cart(
-                        cartID = chkID,
-                        cartUsername = userName.toString(),
-                        cartProductID = id,
-                        cartProductName = binding.txtProductDetailName.text.toString(),
-                        cartProductQuantity = 1,
-                        cartProductPrice = productPrice.toString().toDouble(),
-                        cartProductSize = binding.txtSize.text.toString(),
-                        cartProductPhoto = binding.imgProductDetail.cropToBlob(300,300),
-                        cartStatus = "Added To Cart",
-                        cartTotalPrice = productPrice.toString().toDouble(),
-                        cartCheck = "",
-                    )
-                    val inform = " Product has added to cart. \n"
-                    informationDialog(inform)
-                    vmC.set(c)
-                    nav.navigate(R.id.action_global_homeFragment)
+
+                    var cProduct = vmC.getProduct(id)
+                    if (cProduct != null) {
+                        if(cProduct.cartProductID == id && cProduct.cartStatus != "Done The Payment" && cProduct.cartCheck != "Done"){
+                            val c = Cart(
+                                cartID = cProduct.cartID,
+                                cartUsername = cProduct.cartUsername,
+                                cartProductID = cProduct.cartProductID,
+                                cartProductName = cProduct.cartProductName,
+                                cartProductQuantity = cProduct.cartProductQuantity + 1,
+                                cartProductPrice = cProduct.cartProductPrice,
+                                cartProductSize = cProduct.cartProductSize,
+                                cartProductPhoto = cProduct.cartProductPhoto,
+                                cartStatus = cProduct.cartStatus,
+                                cartTotalPrice = cProduct.cartTotalPrice,
+                                cartCheck = cProduct.cartCheck,
+                            )
+                            val inform = " Product has added to cart. \n"
+                            informationDialog(inform)
+                            vmC.set(c)
+                            nav.navigate(R.id.action_global_homeFragment)
+                        }else if(cProduct.cartProductID == id && cProduct.cartStatus == "Done The Payment"  && cProduct.cartCheck == "Done") {
+                            var chkID = vmC.validID()
+                            //ATC = Added To Cart
+                            //PTP = Process To Payment
+                            //DTP = Done The Payment
+                            val c = Cart(
+                                cartID = chkID,
+                                cartUsername = userName.toString(),
+                                cartProductID = id,
+                                cartProductName = binding.txtProductDetailName.text.toString(),
+                                cartProductQuantity = 1,
+                                cartProductPrice = productPrice.toString().toDouble(),
+                                cartProductSize = binding.txtSize.text.toString(),
+                                cartProductPhoto = binding.imgProductDetail.cropToBlob(300,300),
+                                cartStatus = "Added To Cart",
+                                cartTotalPrice = productPrice.toString().toDouble(),
+                                cartCheck = "",
+                            )
+                            val inform = " Product has added to cart. \n"
+                            informationDialog(inform)
+                            vmC.set(c)
+                            nav.navigate(R.id.action_global_homeFragment)
+                        }
+
+                    }else {
+                        var chkID = vmC.validID()
+                        //ATC = Added To Cart
+                        //PTP = Process To Payment
+                        //DTP = Done The Payment
+                        val c = Cart(
+                            cartID = chkID,
+                            cartUsername = userName.toString(),
+                            cartProductID = id,
+                            cartProductName = binding.txtProductDetailName.text.toString(),
+                            cartProductQuantity = 1,
+                            cartProductPrice = productPrice.toString().toDouble(),
+                            cartProductSize = binding.txtSize.text.toString(),
+                            cartProductPhoto = binding.imgProductDetail.cropToBlob(300,300),
+                            cartStatus = "Added To Cart",
+                            cartTotalPrice = productPrice.toString().toDouble(),
+                            cartCheck = "",
+                        )
+                        val inform = " Product has added to cart. \n"
+                        informationDialog(inform)
+                        vmC.set(c)
+                        nav.navigate(R.id.action_global_homeFragment)
+                    }
                 }else{
                     val err = " Select the Size of Product. \n"
                     errorDialog(err)

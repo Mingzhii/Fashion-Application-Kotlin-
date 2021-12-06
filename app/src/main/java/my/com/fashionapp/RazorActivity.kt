@@ -143,7 +143,7 @@ class RazorActivity : AppCompatActivity(), PaymentResultListener {
                     cartProductPhoto = it.cartProductPhoto,
                     cartTotalPrice = it.cartTotalPrice,
                     cartStatus = "Done The Payment",
-                    cartCheck = "",
+                    cartCheck = "Done",
 
                     )
             }

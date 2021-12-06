@@ -159,32 +159,24 @@ class CartFragment : Fragment() {
         val u = emailLogin?.let { vmU.getEmail(it) }
 
         vm.getAll().observe(viewLifecycleOwner) { list ->
-
             val cartArray = list.filter { c ->
                 c.cartUsername == u?.userName && c.cartStatus != "Done The Payment"
             }
-
             if(cartArray.isEmpty()){
                 nav.navigate(R.id.emptyCartLogin)
             }
-
             val caltotal = cartArray.filter { c ->
                 c.cartCheck == "Checked"
             }
             if(caltotal.isNotEmpty()){
-
-
                 var totalPrice = 0.0
                 val shipping = 5.0
                 var subTotal = 0.0
                 arrayPress.clear()
-
                 for(i in 0..caltotal.size - 1){
-
                     val totalProductPrice = caltotal[i].cartTotalPrice
                     totalPrice += totalProductPrice
                     subTotal = totalPrice + 5.0
-
                     var ol = OrderList(
                         orderProductID = caltotal[i].cartProductID,
                         orderCartID = caltotal[i].cartID,
@@ -194,34 +186,26 @@ class CartFragment : Fragment() {
                     arrayPress.add(ol)
                     arrayPress.size
                 }
-
                 binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
                 binding.txtCartShipping.text = "%.2f".format(shipping)
                 binding.txtCartTotalPrice.text = "%.2f".format(subTotal)
-
             } else {
-
                 val totalPrice = 0.0
                 val shipping = 0.0
                 val subTotal = 0.0
-
                 binding.txtCartSubtotalPrice.text = "%.2f".format(totalPrice)
                 binding.txtCartShipping.text = "%.2f".format(shipping)
                 binding.txtCartTotalPrice.text = "%.2f".format(subTotal)
             }
-
             adapter.submitList(cartArray)
         }
-
         binding.btnCheckOut.setOnClickListener {
             if(arrayPress.size != 0 ){
                 checkout(arrayPress)
             } else {
                 Toast.makeText(context,"Please Select the product you want to process to payment", Toast.LENGTH_LONG).show()
             }
-
         }
-
         return binding.root
     }
 
@@ -243,7 +227,6 @@ class CartFragment : Fragment() {
         totalPrice = binding.txtCartTotalPrice.text.toString().toDouble()
 
         nav.navigate(R.id.razorPayFragment, bundleOf("vID" to ""))
-//        nav.navigate(R.id.razorActivity)
     }
 
     fun Fragment.deleteDialog(text: String, cartID: String) {

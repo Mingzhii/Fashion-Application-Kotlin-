@@ -62,7 +62,7 @@ class RazorPayFragment : Fragment() {
 
         vmC.getAll().observe(viewLifecycleOwner) { list ->
             val paymentArray = list.filter { p ->
-                p.cartCheck == "Checked"
+                p.cartCheck == "Checked" && p.cartUsername == username
             }
             adapter.submitList(paymentArray)
         }
